@@ -1,44 +1,46 @@
-import { Urbanist } from "next/font/google";
-import "./globals.css";
+import React from "react";
+import Hero from "@/app/components/Home/Hero";
+import TrustedBrands from "./components/Home/TrustedBrands";
+import Problem from "./components/Home/Problem";
+import TechTicker from "./components/Home/TechTicker";
+import Services from "./components/Home/Services";
+import Process from "./components/Home/Process";
+import FeaturedProjects from "./components/Home/FeaturedProjects";
+import SuccessStory from "./components/Home/SuccessStory";
+import Faq from "./components/Home/Faq";
+import Contact from "./components/Home/Contact";
+import Newsletter from "./components/Home/Newsletter";
+import Agencyimage from "./components/Home/Agencyimage";
+import WorkByIndastry from "./components/Home/WorkByIndastry";
+import Blog from "./components/Home/Blog";
+import Map from "./components/Home/MAp";
+import Indestry from "./components/Home/Indestry";
+import TechStack from "./components/Home/TechStack";
 
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
 
 
-const urbanist = Urbanist({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-Urbanist",
-});
 
-export const metadata = {
-  title: "CampaignSquad",
-  description: "Modern Digital Agency Website",
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function HomePage() {
   return (
-    <html
-      lang="en"
-      className={`${urbanist.variable} h-full antialiased`}
-    >
-      <body
-        className="min-h-full flex flex-col bg-[#02050A] text-white font-sans selection:bg-[#02050A] selection:text-black"
-        style={{ fontFamily: "var(--font-Urbanist), sans-serif" }}
-      >
-        <Navbar />
-
-        <main className="flex-1">
-          {children}
-        </main>
-
-        <Footer />
-        
-      </body>
-    </html>
+    <main className="w-full min-h-screen bg-[#0A0A0A]">
+      <Hero />
+      <TrustedBrands />
+      <Problem />
+      <TechTicker />
+      <Services /> 
+      <Indestry />
+      <WorkByIndastry />
+      <Process />
+      <TechStack />
+      <Map />
+      <Agencyimage />
+     
+      <FeaturedProjects />
+      <SuccessStory />
+      <Faq />
+      <Contact />
+      <Newsletter />
+      <Blog />
+    </main>
   );
 }
