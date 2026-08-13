@@ -37,7 +37,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_2px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] z-10 pointer-events-none" />
 
       {/* Content Container */}
-      <div className="max-w-[1445px] w-full mx-auto px-3 md:px-6 lg:px-12 relative z-20 text-left flex flex-col items-start md:mt-4 lg:mt-8">
+      <div className="max-w-[1445px] w-full mx-auto px-2 md:px-6 lg:px-12 relative z-20 text-left flex flex-col items-start mt-2 md:mt-4 lg:mt-8">
 
         {/* Top Badges Container */}
         <div className="flex flex-wrap items-center gap-2 mb-5 sm:mb-5 w-full">
@@ -144,7 +144,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-[16px] md:text-[18px] lg:text-[18px] xl:text-[19px] 2xl:text-[20px] text-white max-w-[800px] leading-relaxed mb-7 md:mb-4 lg:mb-8"
+          className="text-[16px] md:text-[18px] lg:text-[18px] xl:text-[19px] 2xl:text-[20px] text-white max-w-[800px] leading-relaxed mb-4 md:mb-4 lg:mb-8"
         >
           Focus on building your business while we handle the digital heavy lifting. We deliver end-to-end UI/UX design and scalable web development tailored to your goals—built for performance, seamless user experience, and real growth.
         </motion.p>

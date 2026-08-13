@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 
 const servicesData = [
@@ -141,10 +142,13 @@ function ServiceCard({ item, isActive, cardRef }: { item: typeof servicesData[0]
 
           {/* Floating "View Case Study" pill */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500">
-            <span className="inline-flex items-center gap-2 bg-white/95 text-black text-xs sm:text-sm font-semibold px-4 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-xl">
+            <Link
+              href={`/service/${item.id}`}
+              className="inline-flex items-center gap-2 bg-white/95 text-black text-xs sm:text-sm font-semibold px-4 py-2 sm:px-5 sm:py-2.5 rounded-full shadow-xl"
+            >
               View Case Study
               <FiArrowUpRight className="text-sm sm:text-base" />
-            </span>
+            </Link>
           </div>
 
           {/* Step Badge */}
@@ -182,13 +186,13 @@ function ServiceCard({ item, isActive, cardRef }: { item: typeof servicesData[0]
 
           {/* Added Explore Button inside card */}
           <div className="pt-1 sm:pt-2">
-            <a
-              href="#explore"
+            <Link
+              href={`/service/${item.id}`}
               className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-black text-white font-semibold text-[12px] sm:text-[14px] hover:bg-black/80 shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all duration-300 group/btn w-fit"
             >
               <span>Explore</span>
               <FiArrowUpRight className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -222,7 +226,7 @@ export default function StickyScrollSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // active index অনুযায়ী left side line/bar position update
+  // active index অনুযায়ী left side line/bar position update
   useEffect(() => {
     const el = listRefs.current[activeIndex];
     if (el) {
@@ -317,13 +321,13 @@ export default function StickyScrollSection() {
             </div>
 
             <div>
-              <a
-                href="#explore"
+              <Link
+                href="/services"
                 className="inline-flex items-center gap-2 px-6 py-2 sm:px-8 md:py-3 rounded-full bg-gradient-to-r from-[#FFDDA1] to-[#F7A400] text-black font-semibold text-[12px] sm:text-[15px] hover:opacity-90 shadow-[0_0_25px_rgba(247,164,0,0.4)] transition-all duration-300 group"
               >
                 <span>Explore More</span>
                 <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </a>
+              </Link>
             </div>
           </div>
 

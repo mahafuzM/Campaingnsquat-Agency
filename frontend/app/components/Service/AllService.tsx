@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
+import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
 
 const allServicesSections = [
@@ -219,13 +220,13 @@ function ServiceCard({ item }: { item: typeof allServicesSections[0]["cards"][0]
         </div>
 
         <div>
-          <a
-            href="#explore"
+          <Link
+            href={`/service/${item.id}`}
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black text-white font-semibold text-sm sm:text-base hover:bg-black/80 shadow-md transition-all duration-300 group/btn w-fit"
           >
             <span>Explore</span>
             <FiArrowUpRight className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform text-lg" />
-          </a>
+          </Link>
         </div>
       </div>
     </div>
