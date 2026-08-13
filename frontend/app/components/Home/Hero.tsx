@@ -15,7 +15,7 @@ const techList = [
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full min-h-[100svh] flex items-center justify-start overflow-hidden font-poppins pt-28 pb-10 md:py-20 lg:py-28 bg-[#02050a]">
+    <section className="relative w-full min-h-[100svh] flex items-center justify-start overflow-hidden  pt-28 pb-20 md:py-20 lg:py-28 bg-[#02050a]">
       
       {/* Background Video */}
       <video
