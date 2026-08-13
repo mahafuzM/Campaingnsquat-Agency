@@ -48,7 +48,7 @@ export default function HeroSection() {
             className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#0d1117]/90 backdrop-blur-md border border-[#F7A400]/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)] shrink-0"
           >
             <span className="text-[#F7A400] shrink-0 text-xs sm:text-sm">✨</span>
-            <span className="text-[14px] md:text-[16px] lg:text-[17px] xl:text-[18px] font-semibold tracking-wider text-white/90 leading-tight">
+            <span className="text-[15px] md:text-[16px] lg:text-[17px] xl:text-[18px] font-semibold tracking-[wider] text-white leading-tight">
               Award-Winning Web & UI/UX Agency
             </span>
           </motion.div>
@@ -81,7 +81,7 @@ export default function HeroSection() {
           <div className="flex items-center gap-0.5 text-[#F7A400] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[19px] 2xl:text-[20px]">
             {"★".repeat(5)}
           </div>
-          <span className="text-white text-[14px] xs:text-[13px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[19px] 2xl:text-[20px] font-semibold tracking-wide">
+          <span className="text-white text-[14px] xs:text-[15px] sm:text-[15px] md:text-[15px] lg:text-[17px] xl:text-[19px] 2xl:text-[20px] font-semibold tracking-wide">
             Trusted by 150+ Companies Globally
           </span>
         </motion.div>
@@ -157,13 +157,13 @@ export default function HeroSection() {
         >
           <a
             href="#explore"
-            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 sm:gap-1.5 px-3 sm:px-8 py-3 sm:py-3 rounded-full bg-gradient-to-r from-[#FFDDA1] to-[#F7A400] text-black font-semibold text-[12px] xs:text-[13px] sm:text-[14px] md:text-[15px] xl:text-[16px] hover:opacity-95 active:scale-[0.98] shadow-[0_0_20px_rgba(247,164,0,0.3)] transition-all duration-300 group whitespace-nowrap text-center"
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 sm:gap-1.5  sm:px-8 py-3 sm:py-3 rounded-full bg-gradient-to-r from-[#FFDDA1] to-[#F7A400] text-black font-semibold text-[12px] xs:text-[13px] sm:text-[14px] md:text-[15px] xl:text-[16px] hover:opacity-95 active:scale-[0.98] shadow-[0_0_20px_rgba(247,164,0,0.3)] transition-all duration-300 group whitespace-nowrap text-center"
           >
             <span>Explore More</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover:translate-x-1 transition-transform shrink-0" />
           </a>
           
-          <button className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 sm:gap-2 px-3 sm:px-8 py-3 sm:py-3 rounded-full bg-[#0d1117]/80 backdrop-blur-md border border-white/20 text-white font-bold text-[12px] xs:text-[13px] sm:text-[14px] md:text-[15px] xl:text-[16px] hover:bg-white/10 hover:border-white/40 active:scale-[0.98] transition-all duration-300 whitespace-nowrap text-center">
+          <button className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 sm:gap-2  sm:px-8 py-3 sm:py-3 rounded-full bg-[#0d1117]/80 backdrop-blur-md border border-white/20 text-white font-bold text-[12px] xs:text-[13px] sm:text-[14px] md:text-[15px] xl:text-[16px] hover:bg-white/10 hover:border-white/40 active:scale-[0.98] transition-all duration-300 whitespace-nowrap text-center">
             <span>How It Works</span> 
             <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-white shrink-0" />
           </button>
