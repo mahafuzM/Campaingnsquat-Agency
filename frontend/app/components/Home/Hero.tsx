@@ -18,17 +18,18 @@ export default function HeroSection() {
     <section className="relative w-full min-h-[100svh] flex items-center justify-start overflow-hidden  pt-28 pb-25 md:py-20 lg:py-28 bg-[#02050a]">
       
       {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover object-center z-0"
-      >
-        <source src="/assets/videos/hello1.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
+     <video
+  autoPlay
+  loop
+  muted
+  playsInline
+  preload="auto"
+  webkit-playsinline="true"
+  className="absolute inset-0 w-full h-full object-cover object-center z-0 pointer-events-none"
+>
+  <source src="/assets/videos/hello1.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
       {/* Dark Overlay with Gradient Fade */}
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#02050a] via-[#02050a]/90 to-transparent pointer-events-none" />
 
