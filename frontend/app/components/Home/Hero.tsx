@@ -127,7 +127,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="text-[28px] xs:text-[30px] sm:text-[34px] md:text-[42px] lg:text-[50px] xl:text-[56px] 2xl:text-[62px] font-extrabold tracking-tight leading-[1.2] sm:leading-[1.1] text-white max-w-[1200px] mb-4 sm:mb-6"
+          className="text-[30px] xs:text-[30px] sm:text-[34px] md:text-[42px] lg:text-[50px] xl:text-[56px] 2xl:text-[62px] font-extrabold tracking-tight leading-[1.2] sm:leading-[1.1] text-white max-w-[1200px] mb-4 sm:mb-6"
         >
           You Build the Empire, We Build the Tech —{" "}
           <span
@@ -143,7 +143,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[18px] xl:text-[19px] 2xl:text-[20px] text-white max-w-[800px] leading-relaxed mb-5 md:mb-4 lg:mb-8"
+          className="text-[16px] sm:text-[16px] md:text-[18px] lg:text-[18px] xl:text-[19px] 2xl:text-[20px] text-white max-w-[800px] leading-relaxed mb-5 md:mb-4 lg:mb-8"
         >
           Focus on building your business while we handle the digital heavy lifting. We deliver end-to-end UI/UX design and scalable web development tailored to your goals—built for performance, seamless user experience, and real growth.
         </motion.p>
