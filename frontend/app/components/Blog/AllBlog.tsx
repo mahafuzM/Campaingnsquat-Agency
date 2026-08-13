@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiArrowRight, FiX, FiSearch } from "react-icons/fi";
 import { HiOutlineCalendar } from "react-icons/hi";
@@ -19,7 +20,6 @@ const initialBlogs = [
       "Betopia Group has unveiled its Vision 2030 strategy, outlining plans to double its workforce within a year, reorganise its leadership structure and expand investment in artificial intelligence (AI), cloud computing and enterprise technologies as it pursues global growth.",
     image:
       "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=800&auto=format&fit=crop",
-    link: "#",
   },
   {
     id: 2,
@@ -30,7 +30,6 @@ const initialBlogs = [
       "Betopia Group has unveiled its Vision 2030 strategy and announced plans to double its workforce within a year as it expand investment in artificial intelligence, cloud computing and enterprise.",
     image:
       "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop",
-    link: "#",
   },
   {
     id: 3,
@@ -41,7 +40,6 @@ const initialBlogs = [
       "From a seven-person startup founded with just Tk5 lakh to a tech group serving clients in 80 countries, Betopia Group is betting that Bangladesh's future lies...",
     image:
       "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop",
-    link: "#",
   },
   {
     id: 4,
@@ -52,7 +50,6 @@ const initialBlogs = [
       "Exploring how modern businesses are scaling their cloud infrastructure to meet demands, ensuring high availability, security, and performance.",
     image:
       "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop",
-    link: "#",
   },
   {
     id: 5,
@@ -63,7 +60,6 @@ const initialBlogs = [
       "Artificial Intelligence is no longer optional. Startups leveraging custom AI workflows are outperforming traditional competitors at unprecedented rates.",
     image:
       "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&auto=format&fit=crop",
-    link: "#",
   },
   {
     id: 6,
@@ -74,7 +70,6 @@ const initialBlogs = [
       "Consistency is key. How unified design systems save thousands of development hours while elevating brand identity across platforms.",
     image:
       "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=800&auto=format&fit=crop",
-    link: "#",
   },
 ];
 
@@ -279,7 +274,7 @@ export default function NewsroomSection() {
                 }`}
               >
                 {/* Card Image Container */}
-                <div className={`relative rounded-xl overflow-hidden shrink-0 ${
+                <Link href={`/blog/${blog.id}`} className={`relative rounded-xl overflow-hidden shrink-0 block ${
                   viewMode === "list" ? "w-full md:w-[320px] h-[220px]" : "w-full h-[220px] mb-5"
                 }`}>
                   <Image
@@ -291,7 +286,7 @@ export default function NewsroomSection() {
                   <div className="absolute top-3 right-3 w-8 h-8 rounded-full backdrop-blur-md bg-black/40 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg border border-white/10">
                     <GoArrowUpRight className="w-4 h-4" />
                   </div>
-                </div>
+                </Link>
 
                 {/* Content Area */}
                 <div className="flex flex-col justify-between flex-1 w-full">
@@ -308,9 +303,11 @@ export default function NewsroomSection() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-[18px] sm:text-[20px] font-bold tracking-tight mb-3 text-white group-hover:text-[#F7A400] transition-colors duration-300 line-clamp-2 leading-snug">
-                      {blog.title}
-                    </h3>
+                    <Link href={`/blog/${blog.id}`}>
+                      <h3 className="text-[18px] sm:text-[20px] font-bold tracking-tight mb-3 text-white group-hover:text-[#F7A400] transition-colors duration-300 line-clamp-2 leading-snug">
+                        {blog.title}
+                      </h3>
+                    </Link>
 
                     {/* Description */}
                     <p className="text-[14px] sm:text-[15px] text-white/80 mb-6 line-clamp-3 leading-relaxed font-normal">
@@ -320,17 +317,17 @@ export default function NewsroomSection() {
 
                   {/* Card Footer Link */}
                   <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                    <a
-                      href={blog.link}
+                    <Link
+                      href={`/blog/${blog.id}`}
                       className="inline-flex items-center gap-2 text-[14px] font-semibold text-white group-hover:text-[#F7A400] transition-colors duration-300"
                     >
                       Read Story
                       <FiArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                    </a>
+                    </Link>
 
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-300 group-hover:bg-[#F7A400] group-hover:text-black transition-all duration-300">
+                    <Link href={`/blog/${blog.id}`} className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-300 group-hover:bg-[#F7A400] group-hover:text-black transition-all duration-300">
                       <GoArrowUpRight className="w-4 h-4" />
-                    </div>
+                    </Link>
                   </div>
                 </div>
               </motion.div>

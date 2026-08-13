@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { FiArrowRight, FiArrowUpRight, FiX, FiSearch } from "react-icons/fi";
 import { IoChevronDown } from "react-icons/io5";
@@ -10,11 +11,12 @@ const initialProjects = [
   {
     id: 1,
     title: "farmercare",
+    slug: "farmercare",
     tag: "Website Development",
     category: "Website Development",
     description: "Integrated Agri-FinTech Ecosystem – Transforming The Agricultural Value Chain With A Data-Driven Financial Platform.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    link: "/our-projects/1",
     bgClass: "bg-gradient-to-br from-[#73A917]",
     date: 2026,
     popularity: 90,
@@ -23,11 +25,12 @@ const initialProjects = [
   {
     id: 2,
     title: "humanity of bangladesh",
+    slug: "humanity-of-bangladesh",
     tag: "Ecommerce Development",
     category: "Ecommerce Development",
     description: "Scalable NGO Management Ecosystem – Streamlining Nationwide Relief Operations And Donation Transparency For Maximum Social.",
     image: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb9?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    link: "/our-projects/2",
     bgClass: "bg-gradient-to-br from-[#17649A]",
     date: 2025,
     popularity: 85,
@@ -36,11 +39,12 @@ const initialProjects = [
   {
     id: 3,
     title: "amar vote kendra",
+    slug: "amar-vote-kendra",
     tag: "Mobile App Development",
     category: "Mobile App Development",
     description: "A High-Performance GovTech Mobile Application That Handled 100,000 Requests Per Second To Help Citizens Find Polling Stations.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    link: "/our-projects/3",
     bgClass: "bg-gradient-to-br from-[#FFC547]",
     date: 2024,
     popularity: 95,
@@ -49,11 +53,12 @@ const initialProjects = [
   {
     id: 4,
     title: "digital health platform",
+    slug: "digital-health-platform",
     tag: "UI/UX Design",
     category: "UI/UX Design",
     description: "Next-Gen Telemedicine And Patient Management System Connecting Rural Patients With Specialized Doctors Instantly.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    link: "/our-projects/4",
     bgClass: "bg-gradient-to-br from-[#005B3E]",
     date: 2026,
     popularity: 80,
@@ -62,11 +67,12 @@ const initialProjects = [
   {
     id: 5,
     title: "Enterprise Cloud ERP",
+    slug: "enterprise-cloud-erp",
     tag: "Software Development",
     category: "Software Development",
     description: "A highly scalable enterprise resource planning platform built with modern cloud architecture and real-time analytics.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    link: "/our-projects/5",
     bgClass: "bg-gradient-to-br from-[#3b82f6]",
     date: 2026,
     popularity: 92,
@@ -349,13 +355,13 @@ export default function FeaturedProjects() {
                     </motion.div>
 
                     {/* Arrow reveal on hover, top-right */}
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.6, rotate: -45 }}
-                      whileHover={{ opacity: 1, scale: 1, rotate: 0 }}
-                      className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#F7A400] text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
+                    <Link
+                      href={project.link}
+                      aria-label={`View ${project.title}`}
+                      className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#F7A400] text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg cursor-pointer"
                     >
                       <FiArrowRight className="w-4 h-4" />
-                    </motion.div>
+                    </Link>
                   </div>
 
                   {/* Card Content */}
@@ -371,13 +377,13 @@ export default function FeaturedProjects() {
 
                     {/* Explore Button */}
                     <div className="pt-1 sm:pt-2">
-                      <a
+                      <Link
                         href={project.link}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-black text-white font-semibold text-[12px] sm:text-[13px] md:text-[14px] hover:bg-black/80 shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all duration-300 group/btn w-fit"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-black text-white font-semibold text-[12px] sm:text-[13px] md:text-[14px] hover:bg-black/80 shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all duration-300 group/btn w-fit cursor-pointer"
                       >
                         <span>Explore</span>
                         <FiArrowUpRight className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </TiltCard>

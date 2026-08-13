@@ -2,37 +2,42 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 
 const projects = [
   {
+    id: 1,
     title: "farmercare",
     tag: "Agri-Tech",
     description: "Integrated Agri-FinTech Ecosystem – Transforming The Agricultural Value Chain With A Data-Driven Financial Platform.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    link: "/our-projects/1",
   },
   {
+    id: 2,
     title: "humanity of bangladesh",
     tag: "Social Impact",
     description: "Scalable NGO Management Ecosystem – Streamlining Nationwide Relief Operations And Donation Transparency For Maximum Social.",
     image: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb9?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    link: "/our-projects/2",
   },
   {
+    id: 3,
     title: "amar vote kendra",
     tag: "GovTech",
     description: "A High-Performance GovTech Mobile Application That Handled 100,000 Requests Per Second To Help Citizens Find Polling Stations.",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    link: "/our-projects/3",
   },
   {
+    id: 4,
     title: "digital health platform",
     tag: "HealthTech",
     description: "Next-Gen Telemedicine And Patient Management System Connecting Rural Patients With Specialized Doctors Instantly.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop",
-    link: "#",
+    link: "/our-projects/4",
   },
 ];
 
@@ -170,7 +175,7 @@ export default function FeaturedProjects() {
 
             return (
               <TiltCard
-                key={index}
+                key={project.id}
                 index={index}
                 isRightColumn={isRightColumn}
                 className={`${cardBgs[index]} rounded-[10px] p-5 sm:p-8 flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-shadow duration-500 group relative overflow-hidden will-change-transform ${
@@ -204,13 +209,13 @@ export default function FeaturedProjects() {
                   </motion.div>
 
                   {/* Arrow reveal on hover, top-right */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.6, rotate: -45 }}
-                    whileHover={{ opacity: 1, scale: 1, rotate: 0 }}
-                    className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#F7A400] text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
+                  <Link
+                    href={project.link}
+                    aria-label={`View ${project.title}`}
+                    className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#F7A400] text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg cursor-pointer"
                   >
                     <FiArrowRight className="w-4 h-4" />
-                  </motion.div>
+                  </Link>
                 </div>
 
                 {/* Card Content: Title -> Subtitle -> Explore Button */}
@@ -226,13 +231,13 @@ export default function FeaturedProjects() {
 
                   {/* Explore Button */}
                   <div className="pt-1 sm:pt-2">
-                    <a
+                    <Link
                       href={project.link}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-black text-white font-semibold text-[12px] sm:text-[13px] md:text-[14px] hover:bg-black/80 shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all duration-300 group/btn w-fit"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-black text-white font-semibold text-[12px] sm:text-[13px] md:text-[14px] hover:bg-black/80 shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all duration-300 group/btn w-fit cursor-pointer"
                     >
                       <span>Explore</span>
                       <FiArrowUpRight className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </TiltCard>
@@ -242,25 +247,28 @@ export default function FeaturedProjects() {
 
         {/* ================= VIEW ALL PROJECT BUTTON SECTION ================= */}
         <div className="flex justify-center mt-8 sm:mt-12">
-          <motion.a
+          <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.97 }}
-            href="#all-projects"
-            className="relative inline-flex items-center gap-2.5 py-[11px] px-[22px] sm:py-[12px] sm:px-[30px] rounded-full bg-gradient-to-r from-[#FFDDA1] to-[#F7A400] text-black font-extrabold text-[13px] sm:text-[16px] hover:opacity-95 shadow-[0_0_35px_rgba(247,164,0,0.4)] transition-all duration-300 group overflow-hidden"
           >
-            {/* Pulsing glow ring behind the button */}
-            <motion.span
-              animate={{ opacity: [0.4, 0.9, 0.4], scale: [1, 1.06, 1] }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute inset-0 rounded-full bg-[#F7A400]/50 blur-md -z-10"
-            />
-            View All Projects
-            <FiArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-2 transition-transform duration-300" />
-          </motion.a>
+            <Link
+              href="/our-projects"
+              className="relative inline-flex items-center gap-2.5 py-[11px] px-[22px] sm:py-[12px] sm:px-[30px] rounded-full bg-gradient-to-r from-[#FFDDA1] to-[#F7A400] text-black font-extrabold text-[13px] sm:text-[16px] hover:opacity-95 shadow-[0_0_35px_rgba(247,164,0,0.4)] transition-all duration-300 group overflow-hidden cursor-pointer"
+            >
+              {/* Pulsing glow ring behind the button */}
+              <motion.span
+                animate={{ opacity: [0.4, 0.9, 0.4], scale: [1, 1.06, 1] }}
+                transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute inset-0 rounded-full bg-[#F7A400]/50 blur-md -z-10"
+              />
+              View All Projects
+              <FiArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-2 transition-transform duration-300" />
+            </Link>
+          </motion.div>
         </div>
 
       </div>

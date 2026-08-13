@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiArrowRight, FiSearch, FiCheckCircle } from "react-icons/fi";
 import { HiOutlineSparkles } from "react-icons/hi";
@@ -97,7 +98,6 @@ export default function AgencyProductShowcase() {
       <div className="max-w-[1300px] mx-auto relative z-20">
 
         {/* Section Header */}
-           {/* Section Header */}
         <div className="text-center max-w-[700px] mx-auto mb-[56px]">
           <div className="inline-flex items-center gap-[8px] px-[16px] py-[6px] rounded-full text-[12px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-[16px] shadow-sm backdrop-blur-md">
             <HiOutlineSparkles className="w-[16px] h-[16px] text-amber-400" />
@@ -173,7 +173,7 @@ export default function AgencyProductShowcase() {
               >
                 <div>
                   {/* Product Image Box */}
-                  <div className="relative w-full h-[210px] overflow-hidden bg-slate-900">
+                  <Link href={`/our-product/${product.id}`} className="relative w-full h-[210px] overflow-hidden bg-slate-900 block">
                     <Image
                       src={product.image}
                       alt={product.title}
@@ -184,16 +184,18 @@ export default function AgencyProductShowcase() {
                     <div className="absolute top-[16px] left-[16px] z-10 px-[12px] py-[4px] rounded-[8px] bg-slate-900/90 backdrop-blur-md text-amber-400 font-bold text-[10px] tracking-wider uppercase border border-white/10 shadow-lg">
                       {product.tag}
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Card Content */}
                   <div className="p-[24px]">
                     <span className="text-[12px] font-semibold text-amber-400 tracking-wide uppercase block mb-[6px]">
                       {product.category}
                     </span>
-                    <h3 className="text-[20px] font-bold text-white mb-[10px] group-hover:text-amber-400 transition-colors">
-                      {product.title}
-                    </h3>
+                    <Link href={`/our-product/${product.id}`}>
+                      <h3 className="text-[20px] font-bold text-white mb-[10px] group-hover:text-amber-400 transition-colors">
+                        {product.title}
+                      </h3>
+                    </Link>
                     <p className="text-white text-[12px] sm:text-[14px] leading-relaxed mb-[20px] font-normal">
                       {product.description}
                     </p>
@@ -210,15 +212,18 @@ export default function AgencyProductShowcase() {
                   </div>
                 </div>
 
-                {/* Card Button */}
+                {/* Card Button with original gradient styling & dynamic link */}
                 <div className="p-[24px] pt-0">
-                  <a
-                    href={product.link}
-                    className="w-full py-[12px] px-[16px] rounded-[12px] bg-amber-500 hover:bg-amber-400 text-black text-[12px] font-bold flex items-center justify-center gap-[8px] group/btn transition-all duration-300 shadow-md"
+                  <Link
+                    href={`/our-product/${product.id}`}
+                    className="w-full py-[12px] px-[16px] rounded-[12px] text-black text-[12px] font-bold flex items-center justify-center gap-[8px] group/btn transition-all duration-300 shadow-md"
+                    style={{
+                      backgroundImage: "linear-gradient(90deg, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
+                    }}
                   >
                     <span>View Product Details</span>
                     <FiArrowRight className="w-[16px] h-[16px] transform group-hover/btn:translate-x-1 transition-transform" />
-                  </a>
+                  </Link>
                 </div>
               </motion.div>
             ))}
