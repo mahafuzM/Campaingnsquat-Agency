@@ -135,12 +135,12 @@ export default function Dynamic3DGallery() {
       <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[#F7A400]/10 rounded-full blur-[120px] pointer-events-none z-0" />
 
       {/* Top Header Content */}
-      <div className="text-center px-4 mb-6 pt-6 sm:pt-10 lg:pt-22 z-20 max-w-7xl mx-auto relative">
+      <div className="text-center px-2 mb-2 pt-6 sm:pt-10 lg:pt-22 z-20 max-w-7xl mx-auto relative">
         <h1 className="text-[26px] md:text-[36px] lg:text-[42px] font-semibold text-white tracking-tight leading-tight">
           Software Development Company Delivering 
           Scalable IT Solutions & <span className="text-transparent bg-clip-text bg-[linear-gradient(90deg,#FFDDA1_0%,#F7A400_50%,#FFDDA1_100%)]">AI</span> Innovation
         </h1>
-        <p className="mt-4 text-[16px] md:text-[18px] lg:text-[20px] text-white/90 max-w-2xl mx-auto">
+        <p className="mt-2 md:mt-4 text-[16px] md:text-[18px] lg:text-[20px] text-white/90 max-w-2xl mx-auto">
           We help startups and enterprises build powerful digital products with custom software development, AI solutions, mobile apps, and web platforms.
         </p>
         <div className="mt-6 flex justify-center">

@@ -153,17 +153,17 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.35 }}
-          className="flex flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto"
+          className="flex flex-row items-center gap-3 sm:gap-4 sm:w-auto"
         >
           <a
             href="#explore"
-            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 sm:gap-1.5  sm:px-8 py-3 sm:py-3 rounded-full bg-gradient-to-r from-[#FFDDA1] to-[#F7A400] text-black font-semibold text-[12px] xs:text-[13px] sm:text-[14px] md:text-[15px] xl:text-[16px] hover:opacity-95 active:scale-[0.98] shadow-[0_0_20px_rgba(247,164,0,0.3)] transition-all duration-300 group whitespace-nowrap text-center"
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 sm:gap-1.5 px-6  sm:px-8 py-3 sm:py-3 rounded-full bg-gradient-to-r from-[#FFDDA1] to-[#F7A400] text-black font-semibold text-[12px] xs:text-[13px] sm:text-[14px] md:text-[15px] xl:text-[16px] hover:opacity-95 active:scale-[0.98] shadow-[0_0_20px_rgba(247,164,0,0.3)] transition-all duration-300 group whitespace-nowrap text-center"
           >
             <span>Explore More</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover:translate-x-1 transition-transform shrink-0" />
           </a>
           
-          <button className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 sm:gap-2  sm:px-8 py-3 sm:py-3 rounded-full bg-[#0d1117]/80 backdrop-blur-md border border-white/20 text-white font-bold text-[12px] xs:text-[13px] sm:text-[14px] md:text-[15px] xl:text-[16px] hover:bg-white/10 hover:border-white/40 active:scale-[0.98] transition-all duration-300 whitespace-nowrap text-center">
+          <button className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1 sm:gap-2 px-6 sm:px-8 py-3 sm:py-3 rounded-full bg-[#0d1117]/80 backdrop-blur-md border border-white/20 text-white font-bold text-[12px] xs:text-[13px] sm:text-[14px] md:text-[15px] xl:text-[16px] hover:bg-white/10 hover:border-white/40 active:scale-[0.98] transition-all duration-300 whitespace-nowrap text-center">
             <span>How It Works</span> 
             <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-white shrink-0" />
           </button>
