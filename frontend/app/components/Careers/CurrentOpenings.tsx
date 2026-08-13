@@ -8,44 +8,44 @@ import { HiOutlineCode, HiOutlineDeviceMobile, HiOutlineShieldCheck, HiOutlineDe
 
 const jobOpenings = [
   {
-    id: 1,
+    id: "mobile-app-development",
     title: "Mobile App Development",
     department: "Engineering",
     location: "On-site (Dhaka)",
     type: "Full Time",
     description: "Build high-performance, scalable cross-platform and native mobile applications using modern frameworks.",
     icon: <HiOutlineDeviceMobile className="w-6 h-6 text-[#F7A400]" />,
-    link: "#",
+    link: "/jobs/mobile-app-development",
   },
   {
-    id: 2,
+    id: "software-development",
     title: "Software Development",
     department: "Engineering",
     location: "On-site (Dhaka)",
     type: "Full Time",
     description: "Architect and scale core enterprise software systems, cloud pipelines, and microservices architecture.",
     icon: <HiOutlineCode className="w-6 h-6 text-[#3b82f6]" />,
-    link: "#",
+    link: "/jobs/software-development",
   },
   {
-    id: 3,
+    id: "web-development",
     title: "Web Design & Development",
     department: "Design & Tech",
     location: "On-site (Dhaka)",
     type: "Full Time",
     description: "Craft stunning, lightning-fast, and immersive web experiences blending cutting-edge UI/UX with clean code.",
     icon: <HiOutlineDesktopComputer className="w-6 h-6 text-emerald-400" />,
-    link: "#",
+    link: "/jobs/web-development",
   },
   {
-    id: 4,
-    title: "UI/UX Design",
-    department: "Design",
-    location: "On-site (Dhaka)",
+    id: "key-account-manager",
+    title: "Key Account Manager",
+    department: "Engineering",
+    location: "On-site",
     type: "Full Time",
-    description: "Design user-centric digital products, interactive prototypes, and design systems for global enterprise brands.",
+    description: "Engage with international clients, understand client needs, and manage long-term relationships effectively.",
     icon: <HiOutlineShieldCheck className="w-6 h-6 text-purple-400" />,
-    link: "#",
+    link: "/jobs/key-account-manager",
   },
 ];
 
@@ -65,7 +65,7 @@ export default function CreativeCurrentOpenings() {
   return (
     <section className="w-full bg-[#02050A] py-16 sm:py-24 lg:py-32 overflow-hidden relative text-white font-poppins">
       
-      {/* Background Gradient Fade (নিচ থেকে ওপরের দিকে গাঢ় থেকে হালকা ফেড) */}
+      {/* Background Gradient Fade */}
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#02050a] via-[#02050a]/80 to-transparent pointer-events-none" />
 
       {/* Immersive Creative Background Glow & Grid Effects */}
@@ -95,9 +95,8 @@ export default function CreativeCurrentOpenings() {
           </motion.div>
         </div>
 
-        {/* Filter & Search Bar (Glassmorphism) */}
+        {/* Filter & Search Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-12 bg-[#0d1117]/70 backdrop-blur-2xl border border-white/10 p-4 rounded-2xl shadow-2xl">
-          {/* Department Pills */}
           <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 no-scrollbar">
             {departments.map((dept) => (
               <button
@@ -114,7 +113,6 @@ export default function CreativeCurrentOpenings() {
             ))}
           </div>
 
-          {/* Search Box */}
           <div className="relative w-full sm:w-[320px]">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-zinc-500">
               <FiSearch className="w-4 h-4 text-[#F7A400]" />
@@ -152,11 +150,9 @@ export default function CreativeCurrentOpenings() {
                 whileHover={{ y: -8 }}
                 className="bg-[#0d1117]/80 backdrop-blur-2xl border border-white/10 hover:border-[#F7A400]/70 rounded-3xl p-6 sm:p-8 transition-all duration-500 group relative overflow-hidden flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:shadow-[0_25px_60px_rgba(247,164,0,0.2)]"
               >
-                {/* Creative Ambient Glow on Hover */}
                 <div className="absolute -right-24 -top-24 w-48 h-48 bg-gradient-to-br from-[#F7A400]/20 to-transparent rounded-full blur-3xl group-hover:scale-150 transition-all duration-700 pointer-events-none" />
 
                 <div>
-                  {/* Top Bar: Icon & Type Badge */}
                   <div className="flex items-center justify-between mb-6">
                     <div className="w-14 h-14 rounded-2xl bg-[#02050a] border border-white/15 flex items-center justify-center group-hover:scale-110 group-hover:border-[#F7A400] transition-all shadow-inner">
                       {job.icon}
@@ -166,12 +162,10 @@ export default function CreativeCurrentOpenings() {
                     </span>
                   </div>
 
-                  {/* Title */}
                   <h3 className="text-[22px] sm:text-[26px] font-extrabold text-white mb-3 group-hover:text-[#F7A400] transition-colors">
                     {job.title}
                   </h3>
 
-                  {/* Meta Info (Location & Dept) */}
                   <div className="flex items-center gap-4 text-xs text-zinc-400 mb-4 font-medium">
                     <div className="flex items-center gap-1.5 bg-white/5 px-3 py-1 rounded-lg border border-white/5">
                       <FiMapPin className="text-[#F7A400]" />
@@ -183,13 +177,11 @@ export default function CreativeCurrentOpenings() {
                     </div>
                   </div>
 
-                  {/* Description */}
                   <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-8">
                     {job.description}
                   </p>
                 </div>
 
-                {/* Bottom Action Section */}
                 <div className="pt-4 border-t border-white/10 flex items-center justify-between">
                   <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-medium">
                     <FiCheckCircle className="w-4 h-4" />
@@ -204,7 +196,6 @@ export default function CreativeCurrentOpenings() {
                     <FiArrowUpRight className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                   </Link>
                 </div>
-
               </motion.div>
             ))}
           </div>

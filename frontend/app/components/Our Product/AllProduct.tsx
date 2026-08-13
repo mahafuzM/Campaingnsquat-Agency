@@ -85,7 +85,7 @@ export default function AgencyProductShowcase() {
   });
 
   return (
-    <section className="w-full bg-[#02050A] py-20 px-4 sm:px-6 lg:px-12 font-poppins relative overflow-hidden text-white min-h-screen">
+    <section className="w-full bg-[#02050A] py-[80px] px-[16px] sm:px-[24px] lg:px-[48px] font-poppins relative overflow-hidden text-white min-h-screen">
       
       {/* Background Gradient Fade */}
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#02050a] via-[#02050a]/80 to-transparent pointer-events-none" />
@@ -97,29 +97,37 @@ export default function AgencyProductShowcase() {
       <div className="max-w-[1300px] mx-auto relative z-20">
 
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4 shadow-sm backdrop-blur-md">
-            <HiOutlineSparkles className="w-4 h-4 text-amber-400" />
+           {/* Section Header */}
+        <div className="text-center max-w-[700px] mx-auto mb-[56px]">
+          <div className="inline-flex items-center gap-[8px] px-[16px] py-[6px] rounded-full text-[12px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-[16px] shadow-sm backdrop-blur-md">
+            <HiOutlineSparkles className="w-[16px] h-[16px] text-amber-400" />
             <span>OUR DIGITAL PRODUCTS & SAAS</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Innovative Solutions for <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">Your Business</span>
+          <h2 className="text-[30px] sm:text-[36px] lg:text-[48px] font-semibold tracking-tight text-white leading-tight mb-[16px]">
+            <span 
+              className="text-transparent bg-clip-text drop-shadow-[0_0_30px_rgba(247,164,0,0.3)] inline-block"
+              style={{
+                backgroundImage: "linear-gradient(90deg, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
+              }}
+            >
+              Innovative Solutions for Your Business
+            </span>
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base">
+          <p className="text-white text-[16px] sm:text-[18px] lg:text-[20px] leading-relaxed">
             Explore our ready-to-deploy enterprise software, ERPs, and management systems designed for scale.
           </p>
         </div>
 
         {/* Search & Filter bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 bg-[#0d1117]/80 backdrop-blur-2xl p-4 rounded-2xl shadow-xl border border-white/10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-[16px] mb-[40px] bg-[#0d1117]/80 backdrop-blur-2xl p-[16px] rounded-[16px] shadow-xl border border-white/10">
           
           {/* Categories Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar">
+          <div className="flex items-center gap-[8px] overflow-x-auto w-full md:w-auto pb-[8px] md:pb-0 no-scrollbar">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-300 ${
+                className={`px-[16px] py-[8px] rounded-[12px] text-[12px] font-semibold whitespace-nowrap transition-all duration-300 ${
                   selectedCategory === cat
                     ? "bg-amber-500 text-black shadow-md shadow-amber-500/30 scale-105 font-bold"
                     : "bg-[#02050a] text-zinc-400 border border-white/10 hover:border-amber-500/50 hover:text-white"
@@ -132,27 +140,27 @@ export default function AgencyProductShowcase() {
 
           {/* Search Box */}
           <div className="relative w-full md:w-[300px]">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-zinc-400">
-              <FiSearch className="w-4 h-4 text-amber-400" />
+            <span className="absolute inset-y-0 left-0 flex items-center pl-[12px] pointer-events-none text-zinc-400">
+              <FiSearch className="w-[16px] h-[16px] text-amber-400" />
             </span>
             <input
               type="text"
               placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#02050a] border border-white/15 rounded-xl pl-9 pr-4 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500 transition-colors"
+              className="w-full bg-[#02050a] border border-white/15 rounded-[12px] pl-[36px] pr-[16px] py-[8px] text-[12px] text-white placeholder-zinc-500 focus:outline-none focus:border-amber-500 transition-colors"
             />
           </div>
         </div>
 
-        {/* 3 Cards per row Grid Layout with White Background Cards */}
+        {/* 3 Cards per row Grid Layout */}
         {filteredProducts.length === 0 ? (
-          <div className="text-center py-20 bg-white rounded-2xl border border-slate-200">
-            <h3 className="text-xl font-bold text-slate-800 mb-1">No Products Found</h3>
-            <p className="text-slate-500 text-sm">Try searching with a different keyword or category.</p>
+          <div className="text-center py-[80px] bg-white rounded-[16px] border border-slate-200">
+            <h3 className="text-[20px] font-bold text-slate-800 mb-[4px]">No Products Found</h3>
+            <p className="text-slate-500 text-[14px]">Try searching with a different keyword or category.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[32px]">
             {filteredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
@@ -161,11 +169,11 @@ export default function AgencyProductShowcase() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
                 whileHover={{ y: -6 }}
-                className="bg-white rounded-2xl border border-slate-200 shadow-[0_15px_35px_rgba(0,0,0,0.2)] hover:shadow-[0_20px_45px_rgba(245,158,11,0.2)] flex flex-col justify-between overflow-hidden transition-all duration-300 group"
+                className="bg-[#0b1017] rounded-[16px] border border-white/15 shadow-[0_15px_35px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_45px_rgba(245,158,11,0.2)] flex flex-col justify-between overflow-hidden transition-all duration-300 group"
               >
                 <div>
                   {/* Product Image Box */}
-                  <div className="relative w-full h-[210px] overflow-hidden bg-slate-100">
+                  <div className="relative w-full h-[210px] overflow-hidden bg-slate-900">
                     <Image
                       src={product.image}
                       alt={product.title}
@@ -173,28 +181,28 @@ export default function AgencyProductShowcase() {
                       className="object-cover group-hover:scale-105 transition-transform duration-700 select-none"
                     />
                     {/* Badge Tag */}
-                    <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-lg bg-slate-900/90 backdrop-blur-md text-amber-400 font-bold text-[10px] tracking-wider uppercase border border-white/10 shadow-lg">
+                    <div className="absolute top-[16px] left-[16px] z-10 px-[12px] py-[4px] rounded-[8px] bg-slate-900/90 backdrop-blur-md text-amber-400 font-bold text-[10px] tracking-wider uppercase border border-white/10 shadow-lg">
                       {product.tag}
                     </div>
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-6">
-                    <span className="text-xs font-semibold text-amber-600 tracking-wide uppercase block mb-1">
+                  <div className="p-[24px]">
+                    <span className="text-[12px] font-semibold text-amber-400 tracking-wide uppercase block mb-[6px]">
                       {product.category}
                     </span>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2.5 group-hover:text-amber-600 transition-colors">
+                    <h3 className="text-[20px] font-bold text-white mb-[10px] group-hover:text-amber-400 transition-colors">
                       {product.title}
                     </h3>
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5 font-normal">
+                    <p className="text-white text-[12px] sm:text-[14px] leading-relaxed mb-[20px] font-normal">
                       {product.description}
                     </p>
 
                     {/* Key Feature Bullets */}
-                    <div className="space-y-2 mb-6 pt-3 border-t border-slate-100">
+                    <div className="space-y-[8px] mb-[24px] pt-[12px] border-t border-white/10">
                       {product.features.map((feat, fIdx) => (
-                        <div key={fIdx} className="flex items-center gap-2 text-xs text-slate-700 font-medium">
-                          <FiCheckCircle className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                        <div key={fIdx} className="flex items-center gap-[8px] text-[12px] text-zinc-300 font-medium">
+                          <FiCheckCircle className="w-[14px] h-[14px] text-amber-400 shrink-0" />
                           <span>{feat}</span>
                         </div>
                       ))}
@@ -203,13 +211,13 @@ export default function AgencyProductShowcase() {
                 </div>
 
                 {/* Card Button */}
-                <div className="p-6 pt-0">
+                <div className="p-[24px] pt-0">
                   <a
                     href={product.link}
-                    className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-amber-600 text-white text-xs font-bold flex items-center justify-center gap-2 group/btn transition-all duration-300 shadow-md"
+                    className="w-full py-[12px] px-[16px] rounded-[12px] bg-amber-500 hover:bg-amber-400 text-black text-[12px] font-bold flex items-center justify-center gap-[8px] group/btn transition-all duration-300 shadow-md"
                   >
                     <span>View Product Details</span>
-                    <FiArrowRight className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" />
+                    <FiArrowRight className="w-[16px] h-[16px] transform group-hover/btn:translate-x-1 transition-transform" />
                   </a>
                 </div>
               </motion.div>
