@@ -37,7 +37,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_2px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] z-10 pointer-events-none" />
 
       {/* Content Container */}
-      <div className="max-w-[1445px] w-full mx-auto px-4 md:px-6 lg:px-12 relative z-20 text-left flex flex-col items-start">
+      <div className="max-w-[1445px] w-full mx-auto px-2 md:px-6 lg:px-12 relative z-20 text-left flex flex-col items-start">
 
         {/* Top Badges Container */}
         <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-5 w-full">
