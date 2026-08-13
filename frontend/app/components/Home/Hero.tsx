@@ -48,7 +48,7 @@ export default function HeroSection() {
             className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[#0d1117]/90 backdrop-blur-md border border-[#F7A400]/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)] shrink-0"
           >
             <span className="text-[#F7A400] shrink-0 text-xs sm:text-sm">✨</span>
-            <span className="text-[13px] md:text-[16px] lg:text-[17px] xl:text-[18px] font-semibold tracking-wider text-white/90 leading-tight">
+            <span className="text-[14px] md:text-[16px] lg:text-[17px] xl:text-[18px] font-semibold tracking-wider text-white/90 leading-tight">
               Award-Winning Web & UI/UX Agency
             </span>
           </motion.div>
@@ -59,12 +59,12 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap items-center gap-2 xs:gap-2.5 sm:gap-3 mb-3 sm:mb-4 w-full sm:w-auto"
+          className="flex flex-wrap items-center gap-4 xs:gap-2.5 sm:gap-3 mb-3 sm:mb-4 w-full sm:w-auto"
         >
           {techList.map((tech, idx) => (
             <div
               key={idx}
-              className="w-9 h-9 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 xl:w-18 xl:h-18 shrink-0 rounded-full bg-[#0d1117]/80 border border-white/10 flex items-center justify-center p-1.5 sm:p-2.5 shadow-md hover:border-[#F7A400]/50 transition-all duration-300"
+              className="w-10 h-10 xs:w-10 xs:h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 xl:w-18 xl:h-18 shrink-0 rounded-full bg-[#0d1117]/80 border border-white/10 flex items-center justify-center p-1.5 sm:p-2.5 shadow-md hover:border-[#F7A400]/50 transition-all duration-300"
             >
               <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain filter drop-shadow" />
             </div>
@@ -81,7 +81,7 @@ export default function HeroSection() {
           <div className="flex items-center gap-0.5 text-[#F7A400] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[19px] 2xl:text-[20px]">
             {"★".repeat(5)}
           </div>
-          <span className="text-white/90 text-[12px] xs:text-[13px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[19px] 2xl:text-[20px] font-semibold tracking-wide">
+          <span className="text-white text-[14px] xs:text-[13px] sm:text-[14px] md:text-[15px] lg:text-[17px] xl:text-[19px] 2xl:text-[20px] font-semibold tracking-wide">
             Trusted by 150+ Companies Globally
           </span>
         </motion.div>
