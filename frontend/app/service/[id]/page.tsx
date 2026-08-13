@@ -1,369 +1,653 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useParams } from 'next/navigation';
-import { Check, Plus, Minus } from 'lucide-react';
+import React, { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, Search, Map, PenTool, Code2, TestTube2, LifeBuoy, ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { 
+  FiActivity, FiShoppingBag, FiFilm, FiDollarSign, FiTruck, 
+  FiCpu, FiRadio, FiSettings, FiUsers, FiHome, FiZap, 
+  FiCompass, FiBookOpen, FiShield, FiBox, FiArrowRight, FiArrowUpRight 
+} from "react-icons/fi";
 
+const industries = [
+  { icon: <FiActivity className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Healthcare", description: "Custom healthcare software development for secure, compliant digital platforms" },
+  { icon: <FiShoppingBag className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Retail & E-Commerce", description: "End-to-end retail & ecommerce software development solutions that drive conversions" },
+  { icon: <FiFilm className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Media & Entertainment", description: "Scalable media and entertainment software development for seamless content delivery" },
+  { icon: <FiDollarSign className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Finance & Banking", description: "Robust finance & banking software development for secure financial infrastructure" },
+  { icon: <FiTruck className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Automotive", description: "Advanced automotive software engineering for intelligent connected mobility" },
+  { icon: <FiCpu className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Agriculture", description: "Smart agriculture software development for agri-tech automation & precision farming" },
+  { icon: <FiRadio className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Telecommunication", description: "Scalable telecom software development for robust network management platforms" },
+  { icon: <FiSettings className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Manufacturing", description: "Custom manufacturing software development for automated production optimization" },
+  { icon: <FiUsers className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Public Sector & Government", description: "Trusted government software development for secure digital governance platforms" },
+  { icon: <FiHome className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Real Estate", description: "Custom PropTech & real estate software development for smart property management platforms" },
+  { icon: <FiZap className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Energy & Utilities", description: "Intelligent energy software development for real-time monitoring & utility management" },
+  { icon: <FiCompass className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Travel & Hospitality", description: "Custom travel & hospitality software development for seamless booking experiences" },
+  { icon: <FiBookOpen className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Education & E-Learning", description: "Scalable education & eLearning software development for modern digital classrooms" },
+  { icon: <FiShield className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Insurance", description: "Custom insurance software development for automated policy & claims management" },
+  { icon: <FiBox className="w-4 h-4 sm:w-6 sm:h-6" />, title: "Logistics & Supply Chain", description: "End-to-end logistics & supply chain software development for real-time visibility" },
+];
 
-const UXWireframing = () => {
-    const params = useParams();
-    const id = params?.id;
+const projects = [
+  {
+    title: "farmercare",
+    tag: "Agri-Tech",
+    description: "Integrated Agri-FinTech Ecosystem – Transforming The Agricultural Value Chain With A Data-Driven Financial Platform.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+    link: "#",
+  },
+  {
+    title: "humanity of bangladesh",
+    tag: "Social Impact",
+    description: "Scalable NGO Management Ecosystem – Streamlining Nationwide Relief Operations And Donation Transparency For Maximum Social.",
+    image: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb9?q=80&w=800&auto=format&fit=crop",
+    link: "#",
+  },
+  {
+    title: "amar vote kendra",
+    tag: "GovTech",
+    description: "A High-Performance GovTech Mobile Application That Handled 100,000 Requests Per Second To Help Citizens Find Polling Stations.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
+    link: "#",
+  },
+  {
+    title: "digital health platform",
+    tag: "HealthTech",
+    description: "Next-Gen Telemedicine And Patient Management System Connecting Rural Patients With Specialized Doctors Instantly.",
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800&auto=format&fit=crop",
+    link: "#",
+  },
+];
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        document.title = "UX Wireframing & Strategic UX Architecture | Campaignsquat Ltd";
-    }, []);
+const processSteps = [
+  {
+    id: "01",
+    title: "Project Analysis",
+    icon: Search,
+    description: "Project analysis involves carefully examining the project to understand its objectives, requirements, and overall feasibility. This stage focuses on identifying the problem, analyzing available resources, estimating time and cost, and recognizing possible risks.",
+  },
+  {
+    id: "02",
+    title: "Strategy & Planning",
+    icon: Map,
+    description: "Developing a comprehensive roadmap tailored to your business goals. We define tech stacks, milestones, architecture, and resource allocation to ensure smooth execution from start to finish.",
+  },
+  {
+    id: "03",
+    title: "UX/UI Designing",
+    icon: PenTool,
+    description: "UX/UI designing focuses on creating an interface that is both user-friendly and visually appealing. User Experience (UX) design ensures that the product is easy to use, efficient, and meets user needs, while User Interface (UI) design concentrates on the layout, colors, fonts, and overall visual elements.",
+  },
+  {
+    id: "04",
+    title: "App Development",
+    icon: Code2,
+    description: "Writing clean, scalable, and optimized code. We build robust frontend and backend architectures ensuring high performance, security, and seamless cross-platform compatibility.",
+  },
+  {
+    id: "05",
+    title: "App Testing & Launch",
+    icon: TestTube2,
+    description: "Rigorous quality assurance testing to eliminate bugs, security vulnerabilities, and performance bottlenecks. Once perfected, we handle smooth deployment to production.",
+  },
+  {
+    id: "06",
+    title: "Support & Maintenance",
+    icon: LifeBuoy,
+    description: "Support and maintenance involve providing ongoing assistance and updates after the app is launched. This stage includes fixing bugs, improving performance, adding new features, and ensuring compatibility with updates.",
+  },
+];
 
-    // High-Authority Content Implementation with Stable Image URLs (No Missing Asset Errors)
-    const expertiseData = [
-        { id: "01", title: "Information Architecture", desc: "We organize complex data into logical hierarchies, ensuring users find what they need in under three clicks.", img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=600&auto=format&fit=crop" },
-        { id: "02", title: "Low-Fidelity Wireframes", desc: "Rapid skeletal layouts that prioritize core functionality over aesthetics to validate the user journey early.", img: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=600&auto=format&fit=crop" },
-        { id: "03", title: "User Flow Mapping", desc: "Visualizing every touchpoint to ensure a frictionless transition from landing to conversion for every persona.", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop" },
-        { id: "04", title: "Usability Testing", desc: "Validating structural concepts with real users to identify and fix navigation bottlenecks before coding.", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=600&auto=format&fit=crop" }
-    ];
+const faqs = [
+  {
+    question: "How do I check if my business qualifies for Ebury's financing solutions?",
+    answer: "If the annual revenue of your business is more than £1m, has a tangible net worth of £100,000, and displays a healthy trading record for at least two years, you can apply for Ebury financing.",
+  },
+  {
+    question: "How can I apply?",
+    answer: "You can easily apply by filling out our online form or speaking directly with one of our financial experts to guide you through the process.",
+  },
+  {
+    question: "How long does it take for the funds to be paid?",
+    answer: "Once your application is approved and all documentation is verified, funds are typically disbursed within 24 to 48 hours.",
+  },
+  {
+    question: "How do I repay Ebury?",
+    answer: "Repayments are structured according to your agreed facility terms, usually via automated direct debits or scheduled bank transfers.",
+  },
+  {
+    question: "Why would I choose Ebury finance over a bank loan?",
+    answer: "Ebury offers faster processing, more flexible terms tailored to international trade, and dedicated expert support compared to traditional banks.",
+  },
+  {
+    question: "How long does it take to set up the financing account?",
+    answer: "The account setup and verification process generally takes just a few business days, depending on the complexity of your business structure.",
+  },
+  {
+    question: "Do I have to provide security or a guarantee for the credit line?",
+    answer: "Requirements vary based on the type of financing solution and your business profile. Our experts will discuss this transparently during your consultation.",
+  },
+];
 
-    const featureData = [
-        {
-            title: ["Blueprinting for", "Seamless Scalability"],
-            desc: "Before colors and fonts, we define the logic. Our UX Audit removes distractions, focusing on how a user moves from point A to B. By establishing a solid Information Architecture early on, we prevent costly redesigns during development. We ensure every button, link, and content block serves a specific purpose in your user’s journey, creating a product that is logically sound and incredibly easy to use.",
-            img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop",
-            alt: "Strategic Information Architecture and UX Audit Blueprint for Scalable Tech Products",
-            reverse: false,
-        },
-        {
-            title: ["Empathy-Driven", "User Journey Mapping"],
-            desc: "We don't just design pages; we engineer experiences. Our process involves creating detailed User Journey Maps that reflect the emotional and functional state of your users at every touchpoint. We identify 'pain points' and 'moments of truth' to ensure the final product supports the user exactly when they need it, resulting in higher retention rates and a much more satisfying overall experience.",
-            img: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1000&auto=format&fit=crop",
-            alt: "Empathy-Driven User Journey Mapping and Visual Experience Design",
-            reverse: true,
-        },
-        {
-            title: ["Rapid Iteration with", "Low-Fid Sketches"],
-            desc: "Speed and clarity are key in the early stages of design. We use low-fidelity wireframing to rapidly iterate on ideas and explore multiple layouts in a short amount of time. This 'fail-fast' approach allows us to test different interaction models without getting bogged down in visual details. It provides a clear platform for stakeholders to give feedback on functionality and flow, ensuring everyone is aligned before moving into high-fidelity UI.",
-            img: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=1000&auto=format&fit=crop",
-            alt: "Low-Fidelity Wireframing and Rapid UX Prototyping Sketches",
-            reverse: false,
-        },
-        {
-            title: ["Data-Driven UX", "Logic Validation"],
-            desc: "Intuition is good, but data is better. We validate our wireframes through rigorous UX testing and behavioral analysis. By observing how users interact with our structural layouts, we gain insights into cognitive load and decision-making patterns. This evidence-based approach allows us to refine the navigation, simplify complex forms, and optimize the overall conversion path before high-fidelity design begins.",
-            img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
-            alt: "Data-Driven UX Logic Validation and Wireframe Usability Testing",
-            reverse: true,
-        },
-    ];
-
-    const processSteps = [
-        { title: "Deep-Dive Research", description: "We analyze user personas and competitor landscapes to define a UX strategy that aligns with your business goals.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=400&auto=format&fit=crop", alt: "UX Deep-Dive Research Icon" },
-        { title: "Logical Ideation", description: "Brainstorming structural flows and mapping the site architecture to ensure seamless navigation across all device types.", image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=400&auto=format&fit=crop", alt: "Logical Ideation Icon" },
-        { title: "Rapid Wireframing", description: "Creating the skeletal layout of the application’s key screens, focusing strictly on hierarchy, placement, and interaction.", image: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=400&auto=format&fit=crop", alt: "Rapid Wireframing Icon" },
-        { title: "Expert Validation", description: "Testing the flows against usability heuristics to ensure the experience is intuitive, accessible, and ready for high-fidelity UI.", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400&auto=format&fit=crop", alt: "UX Expert Validation Icon" }
-    ];
-
-    const points = ["User-Centric Architecture", "Frictionless Navigation", "Logical Content Strategy", "Rapid Structural Iteration", "Evidence-Based UX Logic"];
-
-    const industryData = [
-        { title: "Banking UX", desc: "Simplifying complex financial data for easy user understanding.", img: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=600&auto=format&fit=crop", alt: "Banking UX Design" },
-        { title: "Retail Flows", desc: "Optimizing checkout processes to reduce cart abandonment.", img: "https://images.unsplash.com/photo-1556742049-0a67d553c2a3?q=80&w=600&auto=format&fit=crop", alt: "Retail Flows" },
-        { title: "Medical Portals", desc: "Clear information hierarchy for critical healthcare data.", img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=600&auto=format&fit=crop", alt: "Medical Portals" },
-        { title: "LMS Structure", desc: "Mapping logical learning paths for educational platforms.", img: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=600&auto=format&fit=crop", alt: "LMS Structure" },
-        { title: "SaaS Workflows", desc: "Decoupling complex business tools into manageable tasks.", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=600&auto=format&fit=crop", alt: "SaaS Workflows" },
-        { title: "Property Search", desc: "Intuitive filtering and navigation for real estate platforms.", img: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=600&auto=format&fit=crop", alt: "Property Search" },
-        { title: "Booking Logic", desc: "Streamlining multi-step travel booking user journeys.", img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=600&auto=format&fit=crop", alt: "Booking Logic" },
-        { title: "Logistic UX", desc: "Optimizing dashboard flows for fast-paced delivery tracking.", img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=600&auto=format&fit=crop", alt: "Logistic UX" },
-    ];
-
-    const gradientTextStyle = {
-        backgroundImage: "linear-gradient(90deg, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-    };
-
-    return (
-        <main className="overflow-hidden font-poppins bg-[#02050a]">
-            {/* 1. Hero Section */}
-            <section className="relative w-full flex items-center pt-4 md:pt-6 pb-12 md:pt-32 md:pb-16 overflow-hidden">
-                <div className="absolute top-10 left-1/4 w-72 h-72 bg-[#F7A400]/10 blur-[120px] rounded-full opacity-50"></div>
-                <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-blue-500/5 blur-[150px] rounded-full opacity-30"></div>
-                <div className="max-w-[1445px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 w-full pt-4 md:pt-6">
-                    <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
-                        <div className="w-full lg:w-1/2 flex flex-col space-y-6 md:space-y-8 text-center lg:text-left">
-                            <h1 className="text-[26px] md:text-[32px] lg:text-[40px] font-bold text-white leading-[1.15]">
-                                Strategic <span style={gradientTextStyle}>UX Wireframing Services</span> for Scalable Tech Products
-                            </h1>
-                            
-                            <p className="text-white/90 text-[16px] md:text-[20px] max-w-[580px] mx-auto lg:mx-0 leading-relaxed font-light">
-                                Stop wasting development hours on unproven logic. Campaignsquat Ltd. engineers data-driven user flows and low-fidelity prototypes that eliminate friction, reduce churn, and turn complex ideas into intuitive digital interfaces.
-                            </p>
-
-                            <div className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start pt-2">
-                                <Link href="/contact" className="w-full sm:w-auto">
-                                    <button className="w-full sm:w-auto bg-[#F7A400] border-[#f7a400] border-2 text-black font-bold py-3 px-8 md:px-10 text-[14px] md:text-[16px] rounded-[5px] transition-all duration-300 transform hover:bg-transparent hover:text-white active:scale-95 shadow-lg shadow-[#F7A400]/25">
-                                        Architect Your Product
-                                    </button>
-                                </Link>
-                            </div>
-                        </div>
-                        <div className="w-full lg:w-1/2 relative flex justify-center lg:justify-end">
-                            <div className="absolute w-[70%] h-[70%] bg-[#F7A400]/5 blur-[80px] rounded-[5px]"></div>
-                            <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=800&auto=format&fit=crop" alt="Professional UX Wireframing" className="relative z-10 w-full h-auto max-w-[550px] rounded-[10px] transition-transform duration-700 hover:scale-[1.02]" />
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Slider Section */}
-            <section className="w-full overflow-hidden pt-10 md:pt-10">
-
-            </section>
-
-            {/* 2. Expertise Section */}
-            <section className="bg-[#0A0A0A] py-24 md:py-32">
-                <div className="max-w-[1445px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 w-full text-center -mt-10 md:-mt-16 lg:-mt-24">
-                    <div className="mb-20">
-                        <h2 className="text-white text-[26px] md:text-[32px] lg:text-[40px] font-bold mb-6">Our Framework for <span style={gradientTextStyle}>Conversion-Focused UX</span></h2>
-                        <p className="text-white text-[18px] md:text-[20px] max-w-2xl mx-auto leading-relaxed font-medium">We strip away visual noise to focus on the skeletal logic that drives user engagement and product-market fit.</p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {expertiseData.map((item, index) => (
-                            <div key={index} className="group relative bg-[#02050A] border border-white/30 p-10 rounded-[5px] transition-all duration-500 hover:border-[#F7A400]/40 flex flex-col items-start text-left overflow-hidden hover:-translate-y-2">
-                                <span className="absolute -top-2 -right-2 text-white opacity-[0.03] text-5xl font-bold group-hover:opacity-10 transition-all">{item.id}</span>
-                                <div className="mb-8 w-14 h-14 flex items-center justify-start relative z-10">
-                                    <img src={item.img} alt={`${item.title} Expertise Icon`} className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 origin-left" style={{ filter: 'invert(71%) sepia(85%) saturate(945%) hue-rotate(354deg) brightness(102%) contrast(101%)' }} />
-                                </div>
-                                <div className="relative z-10">
-                                    <h3 className="text-white text-[20px] md:text-[22px] font-bold mb-4 group-hover:text-[#F7A400] transition-colors">{item.title}</h3>
-                                    <p className="text-white text-[16px] md:text-[18px] leading-relaxed font-light">{item.desc}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* 3. Features Section */}
-            <section className="py-20 md:py-32">
-                <div className="max-w-[1445px] mx-auto px-6 md:px-12 lg:px-20 w-full">
-                    <div className="flex flex-col gap-24 md:gap-44">
-                        {featureData.map((item, index) => (
-                            <div key={index} className={`flex flex-col ${item.reverse ? "md:flex-row-reverse" : "md:flex-row"} items-center justify-between gap-12 md:gap-24`}>
-                                <div className="w-full md:w-1/2 pt-4 md:pt-6">
-                                    <h3 className="text-white text-[26px] md:text-[32px] lg:text-[40px] font-bold mb-8">
-                                        {item.title.map((line, i) => (
-                                            <span key={i} className="block leading-[1.3] mb-1 last:mb-0">{line}</span>
-                                        ))}
-                                    </h3>
-                                    <p className="text-white text-[16px] md:text-[18px] leading-relaxed font-light text-left max-w-[580px]">
-                                        {item.desc}
-                                    </p>
-                                </div>
-                                <div className="w-full md:w-1/2">
-                                    <div className="relative group overflow-hidden rounded-[5px]">
-                                        <img 
-                                            src={item.img} 
-                                            alt={item.alt} 
-                                            className="relative z-10 w-full aspect-[16/10] object-cover border border-white/10 shadow-2xl transition-all duration-500 group-hover:scale-[1.03] rounded-[5px]" 
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* 4. Process Section */}
-            <section className="w-full bg-[#02050A] py-24 md:py-32">
-                <div className="max-w-[1445px] mx-auto px-6 sm:px-10 md:px-12 lg:px-16">
-                    <div className="flex flex-col items-center text-center mb-20 md:mb-28 pt-4 md:pt-4">
-                        <h2 className="text-white text-[26px] md:text-[32px] lg:text-[40px] font-bold tracking-tight mb-6">Our Strategic UI/UX Design Process</h2>
-                        <p className="text-white text-[16px] md:text-[18px] max-w-2xl font-light">A systematic, authority-driven approach to define, design, and validate the core structural logic of your digital product.</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-10">
-                        {processSteps.map((step, index) => (
-                            <div key={index} className="flex flex-col items-center text-center group cursor-pointer">
-                                <div className="relative mb-10 w-40 h-40 md:w-44 lg:w-48 md:h-44 lg:h-48 flex items-center justify-center">
-                                    <div className="absolute top-0 left-[-15px] w-full h-full rounded-full border-[3px] border-[#F7A400] transition-all duration-700 ease-in-out group-hover:left-0 group-hover:rotate-[360deg] z-0"></div>
-                                    <div className="relative w-full h-full rounded-full bg-[#0A0A0A] border border-white/10 flex items-center justify-center z-10 transition-all duration-500 group-hover:border-[#F7A400]/50 shadow-xl">
-                                        <img src={step.image} alt={step.alt} className="w-16 h-16 md:w-20 lg:w-24 object-contain brightness-0 invert transition-all duration-500 group-hover:scale-110 z-20" />
-                                    </div>
-                                </div>
-                                <div className="w-full flex flex-col items-center -mt-4">
-                                    <h3 className="text-white text-[22px] md:text-[24px] lg:text-[26px] font-bold mb-4 group-hover:text-[#F7A400] transition-colors">{step.title}</h3>
-                                    <p className="text-white text-[15px] md:text-[16px] leading-relaxed font-light max-w-[280px]">{step.description}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* 5. Why Choose Section */}
-            <section className="py-20 md:py-32 lg:py-40 relative z-[1]">
-                <div className="max-w-[1445px] mx-auto px-6 md:px-12 lg:px-20 w-full relative">
-                    <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-32 pt-4 md:pt-6">
-                        
-                        <div className="w-full lg:w-1/2 flex flex-col text-left order-2 lg:order-1 relative z-50"> 
-                            <h2 className="text-white text-[26px] md:text-[32px] lg:text-[40px] font-bold leading-[1.3] mb-8">Logic-First Design That Eliminates Friction</h2>
-                            <p className="text-white text-[16px] md:text-[18px] leading-relaxed font-light mb-10 max-w-[580px]">We specialize in turning complex user requirements into simple, skeletal wireframes that prioritize task completion and ease of use.</p>
-                            
-                            <div className="flex flex-col gap-3 md:gap-4 mb-12">
-                                {points.map((point, index) => (
-                                    <div key={index} className="flex items-center gap-3 group">
-                                        <div className="w-6 h-6 md:w-7 md:h-7 shrink-0 rounded-full border-2 border-[#F7A400] flex items-center justify-center">
-                                            <Check className="text-[#F7A400] w-3.5 h-3.5 md:w-4 md:h-4 stroke-[4px]" />
-                                        </div>
-                                        <span className="text-white text-[18px] md:text-[20px] font-medium leading-none">{point}</span>
-                                    </div>
-                                ))}
-                            </div>
-
-                            <div className="flex justify-start relative z-[100]">
-                                <Link href="/contact" className="inline-block w-full sm:w-auto cursor-pointer pointer-events-auto">
-                                    <button className="bg-[#F7A400] text-black hover:text-white border-2 border-[#F7A400] text-[12px] md:text-[15px] rounded-[5px] px-6 py-2 font-semibold hover:bg-[#0a0a0a] transition-all duration-500 active:scale-95 group pointer-events-auto">
-                                        Get Started
-                                    </button>
-                                </Link>
-                            </div>
-                        </div>
-
-                        <div className="w-full lg:w-1/2 order-1 lg:order-2 relative z-10">
-                            <div className="relative flex justify-center lg:justify-end">
-                                <img 
-                                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" 
-                                    alt="Advanced UX Planning Excellence" 
-                                    className="w-full h-auto max-h-[750px] lg:max-h-[850px] object-contain rounded-[10px] border border-white/5 shadow-2xl scale-105 lg:scale-110" 
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 6. Industries Section */}
-            <section className="py-24 md:py-36 relative z-10 overflow-hidden">
-                <style>{`
-                    @keyframes rotate-border { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-                    .border-run-container { position: relative; padding: 2px; overflow: hidden; background: rgba(255, 255, 255, 0.05); border-radius: 7px; }
-                    .border-run-container:hover .running-border { opacity: 1; }
-                    .running-border { position: absolute; width: 250%; height: 250%; top: -75%; left: -75%; background: conic-gradient(transparent, transparent, transparent, #F7A400); animation: rotate-border 3s linear infinite; opacity: 0; transition: opacity 0.3s; z-index: 0; }
-                    .card-content { position: relative; background: #0a0a0a; border-radius: 5px; z-index: 1; height: 100%; }
-                `}</style>
-                <div className="max-w-[1445px] mx-auto px-6 md:px-12 lg:px-20 w-full">
-                    <div className="text-center max-w-4xl mx-auto mb-16 md:mb-24">
-                        <h2 className="text-white text-[26px] md:text-[32px] lg:text-[40px] font-bold mb-4">Sector-Specific UX Strategy</h2>
-                        <p className="text-white text-[16px] md:text-[18px] lg:text-[20px] font-light">Custom structural logic for diverse industry requirements.</p>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-6 lg:gap-6">
-                        {industryData.map((item, index) => (
-                            <div key={index} className="border-run-container group">
-                                <div className="running-border"></div>
-                                <div className="card-content flex flex-col">
-                                    <div className="w-full aspect-[4/3] overflow-hidden border-b border-white/5 rounded-t-[5px]">
-                                        <img src={item.img} alt={item.alt} className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110" />
-                                    </div>
-                                    <div className="p-6 md:p-8 flex flex-col text-left">
-                                        <h3 className="text-white text-xl md:text-[22px] font-bold mb-3 group-hover:text-[#F7A400] transition-colors">{item.title}</h3>
-                                        <p className="text-white text-[14px] md:text-[15px] font-light">{item.desc}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-            
-            <Questions />
-        </main>
-    );
+const gradientTextStyle = {
+  backgroundImage: "linear-gradient(to right, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
 };
 
-const Questions = () => {
-    const [openIndex, setOpenIndex] = useState<number>(0);
+export default function CombinedPageSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [query, setQuery] = useState("");
+  const [activeStep, setActiveStep] = useState(0);
 
-    const faqs = [
-        {
-            question: "Why is UX & Wireframing important before development?",
-            answer: "Wireframing acts as the architectural blueprint. It allows us to focus on logic and user flow without visual distractions, preventing costly redesigns and ensuring the product is intuitive from day one."
-        },
-        {
-            question: "How long does the UX wireframing phase usually take?",
-            answer: "Depending on complexity, it typically takes 2–4 weeks. This includes deep research, mapping out all user journeys, and creating skeletal layouts for every core screen to prevent technical debt."
-        },
-        {
-            question: "Do you perform usability testing on wireframes?",
-            answer: "Yes. We validate our structural logic through early testing to ensure the navigation is frictionless before we even start the visual UI design phase. This ensures evidence-based UX logic."
-        },
-        {
-            question: "What tools do you use for UX and Wireframing?",
-            answer: "We primarily use Figma and FigJam for rapid wireframing and interactive prototyping, allowing for real-time collaboration and seamless handoff to development teams."
-        },
-        {
-            question: "Can I request changes during the wireframing stage?",
-            answer: "Absolutely. In fact, this is the best time for changes as it is the most cost-effective stage to pivot. We iterate quickly to ensure the logic perfectly matches your business goals."
-        }
-    ];
+  const goTo = (index: number) => {
+    setActiveStep((index + processSteps.length) % processSteps.length);
+  };
 
-    return (
-        <section className="w-full bg-[#02050A] py-8 md:py-10 overflow-hidden font-poppins">
-            <div className="max-w-[1445px] mx-auto px-5 sm:px-10 md:px-16">
-                <div className="text-center mb-12 md:mb-16">
-                    <h2 className="text-[26px] md:text-[32px] lg:text-[40px] font-semibold text-white mb-4 md:mb-8 leading-[1.2]">
-                        Expert Insights: UX & Wireframing
-                    </h2>
-                    <p className="text-white text-[15px] md:text-[20px] max-w-2xl mx-auto font-light">
-                        Quick answers to our professional UX & wireframing process
-                    </p>
-                </div>
+  const filtered = useMemo(() => {
+    if (!query.trim()) return faqs;
+    return faqs.filter(
+      (f) =>
+        f.question.toLowerCase().includes(query.toLowerCase()) ||
+        f.answer.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [query]);
 
-                <div className="space-y-4 md:space-y-4">
-                    {faqs.map((faq, index) => (
-                        <div 
-                            key={index} 
-                            className={`border transition-all duration-300 rounded-[5px] md:rounded-[5px] ${
-                                openIndex === index 
-                                    ? 'border-[#f7a400] bg-[#0A0A0A]' 
-                                    : 'border-[#02050a] bg-[#0A0A0A] hover:border-[#f7a400]'
-                            }`}
-                        >
-                            <button
-                                className="w-full flex items-center justify-between p-4 md:p-5 text-left focus:outline-none"
-                                onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
-                            >
-                                <span className="text-[15px] md:text-[18px] font-semibold leading-tight transition-colors duration-300 pr-4 text-white">
-                                    {faq.question}
-                                </span>
-                                <span className="shrink-0">
-                                    {openIndex === index ? (
-                                        <div className="bg-[#f7a400] p-1 md:p-1.5 rounded-full">
-                                            <Minus size={18} className="md:w-[22px] md:h-[22px]" strokeWidth={3} color="black" />
-                                        </div>
-                                    ) : (
-                                        <div className="bg-white/10 p-1 md:p-1.5 rounded-full">
-                                            <Plus size={18} className="md:w-[18px] md:h-[18px]" strokeWidth={3} color="white" />
-                                        </div>
-                                    )}
-                                </span>
-                            </button>
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
-                            <div 
-                                className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                                    openIndex === index ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
-                                }`}
-                            >
-                                <div className="px-5 md:px-8 pb-6 md:pb-8 text-white text-[14px] md:text-[16px] leading-relaxed font-normal">
-                                    <div className="h-[1px] w-full bg-gray-800/50 mb-5 md:mb-6"></div>
-                                    {faq.answer}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+  return (
+    <div className="w-full bg-[#02050a] text-white relative overflow-hidden font-poppins">
+      
+      {/* 1st Part: Hero Section */}
+      <section className="relative w-full flex items-center pt-4 md:pt-6 pb-12 md:pt-32 md:pb-16 overflow-hidden">
+        <div className="absolute top-10 left-1/4 w-72 h-72 bg-[#F7A400]/10 blur-[120px] rounded-full opacity-50"></div>
+        <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-blue-500/5 blur-[150px] rounded-full opacity-30"></div>
+        <div className="max-w-[1445px] mx-auto px-6 md:px-12 lg:px-20 relative z-10 w-full pt-4 md:pt-6">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
+            <div className="w-full lg:w-1/2 flex flex-col space-y-6 md:space-y-8 text-center lg:text-left">
+              <h1 className="text-[26px] md:text-[32px] lg:text-[40px] font-bold text-white leading-[1.15]">
+                Strategic <span style={gradientTextStyle}>UX Wireframing Services</span> for Scalable Tech Products
+              </h1>
+              
+              <p className="text-white/90 text-[16px] md:text-[20px] max-w-[580px] mx-auto lg:mx-0 leading-relaxed font-light">
+                Stop wasting development hours on unproven logic. Campaignsquat Ltd. engineers data-driven user flows and low-fidelity prototypes that eliminate friction, reduce churn, and turn complex ideas into intuitive digital interfaces.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center gap-5 justify-center lg:justify-start pt-2">
+                <Link href="/contact" className="w-full sm:w-auto">
+                  <button className="w-full sm:w-auto bg-[#F7A400] border-[#f7a400] border-2 text-black font-bold py-3 px-8 md:px-10 text-[14px] md:text-[16px] rounded-[5px] transition-all duration-300 transform hover:bg-transparent hover:text-white active:scale-95 shadow-lg shadow-[#F7A400]/25 cursor-pointer">
+                    Architect Your Product
+                  </button>
+                </Link>
+              </div>
             </div>
-        </section>
-    );
-};
+            
+            <div className="w-full lg:w-1/2 relative flex justify-center lg:justify-end">
+              <div className="absolute w-[70%] h-[70%] bg-[#F7A400]/5 blur-[80px] rounded-[5px]"></div>
+              <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=800&auto=format&fit=crop" alt="Professional UX Wireframing" className="relative z-10 w-full h-auto max-w-[550px] rounded-[10px] transition-transform duration-700 hover:scale-[1.02]" />
+            </div>
+          </div>
+        </div>
+      </section>
 
-export default UXWireframing;
+      {/* 2nd Part: Featured Projects */}
+      <section className="w-full bg-[#02050a] py-4 sm:py-12 md:py-16 lg:py-20 overflow-hidden relative text-white">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1400px] h-[600px] bg-gradient-to-r from-[#ff7a33]/20 via-[#3b82f6]/15 to-[#00ffff]/10 rounded-full blur-[140px] md:blur-[200px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_2px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] pointer-events-none" />
+
+        <div className="max-w-[1445px] mx-auto px-2 sm:px-6 md:px-10 lg:px-[40px] relative z-10">
+          <div className="text-center max-w-[720px] mx-auto mb-10 sm:mb-16 lg:mb-24">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+              className="text-[26px] sm:text-[32px] md:text-[36px] lg:text-[44px] font-bold tracking-tight text-transparent bg-clip-text mb-3 sm:mb-4 inline-block bg-[length:200%_auto]"
+              style={{
+                backgroundImage: "linear-gradient(90deg, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                animation: "shine 6s linear infinite",
+              }}
+            >
+              Featured Projects
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+              className="text-white text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] max-w-[720px] mx-auto leading-relaxed font-normal px-2 sm:px-0"
+            >
+              Where High-End UI/UX Design Meets Scalable Software Development.
+              We Build Digital Products Engineered To Accelerate Your Business Growth.
+            </motion.p>
+
+            <motion.div
+              initial={{ width: 0, opacity: 0 }}
+              whileInView={{ width: 64, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+              className="h-[3px] mx-auto mt-4 sm:mt-6 rounded-full bg-gradient-to-r from-[#FFDDA1] to-[#F7A400]"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 mb-12 lg:mb-32">
+            {projects.map((project, index) => {
+              const cardBgs = [
+                "bg-gradient-to-br from-[#73A917]",
+                "bg-gradient-to-br from-[#17649A]",
+                "bg-gradient-to-br from-[#FFC547]",
+                "bg-gradient-to-br from-[#005B3E]",
+              ];
+
+              const isRightColumn = index % 2 !== 0;
+
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30, scale: 0.96 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ y: isRightColumn ? 20 : -10, scale: 1.01 }}
+                  className={`${cardBgs[index]} rounded-[10px] p-5 sm:p-8 flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-500 group relative overflow-hidden ${
+                    isRightColumn ? "lg:translate-y-16" : ""
+                  }`}
+                >
+                  <div className="pointer-events-none absolute -inset-px rounded-[10px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[#F7A400]/40 via-transparent to-transparent" />
+
+                  <div className="relative w-full h-[220px] sm:h-[300px] lg:h-[320px] rounded-[10px] overflow-hidden bg-black/10 flex items-center justify-center mb-5 sm:mb-6 border border-black/5">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out select-none"
+                    />
+
+                    <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+                    <div className="absolute top-3 left-3 sm:top-4 sm:left-4 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-[8px] sm:rounded-[10px] bg-black/70 backdrop-blur-md border border-white/15 text-[11px] sm:text-xs font-semibold text-[#FFDDA1] shadow-lg">
+                      {project.tag}
+                    </div>
+
+                    <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#F7A400] text-black flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+                      <FiArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col flex-grow justify-between relative z-10">
+                    <div>
+                      <h3 className="text-[20px] sm:text-[26px] lg:text-[30px] font-extrabold tracking-tight capitalize mb-2 sm:mb-3 transition-colors duration-300">
+                        {project.title}
+                      </h3>
+                      <p className="text-[14px] sm:text-[16px] lg:text-[18px] leading-relaxed mb-5 sm:mb-6 opacity-90">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <div className="pt-1 sm:pt-2">
+                      <a
+                        href={project.link}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-black text-white font-semibold text-[12px] sm:text-[13px] md:text-[14px] hover:bg-black/80 shadow-[0_10px_20px_rgba(0,0,0,0.2)] transition-all duration-300 group/btn w-fit"
+                      >
+                        <span>Explore</span>
+                        <FiArrowUpRight className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 3rd Part: Industries We Serve */}
+      <section className="w-full py-8 sm:py-20 lg:py-28 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1400px] h-[600px] bg-gradient-to-r from-[#ff7a33]/10 via-[#3b82f6]/10 to-[#00ffff]/5 rounded-full blur-[150px] sm:blur-[200px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_2px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:2rem_2rem] sm:bg-[size:2.5rem_2.5rem] pointer-events-none" />
+
+        <div className="max-w-[1445px] w-full mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-[800px] mx-auto mb-8 sm:mb-16 lg:mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3 py-1 sm:px-5 sm:py-2 rounded-full bg-[#0d1117] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] mb-3 sm:mb-6"
+            >
+              <span 
+                className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full animate-pulse"
+                style={{ backgroundColor: "#F7A400" }}
+              />
+              <span className="text-[10px] sm:text-[12px] md:text-[13px] font-bold tracking-wider text-white uppercase">
+                INDUSTRIES WE SERVE
+              </span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-[22px] sm:text-[36px] md:text-[44px] font-extrabold tracking-tight text-transparent bg-clip-text leading-tight"
+              style={{
+                backgroundImage: "linear-gradient(to right, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
+              }}
+            >
+              Tailored solutions for diverse industries
+            </motion.h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-x-3 sm:gap-x-12 gap-y-6 sm:gap-y-10">
+            {industries.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: (index % 3) * 0.05 }}
+                className="relative pl-3 sm:pl-6 flex flex-col justify-between group"
+              >
+                <div 
+                  className="absolute left-0 top-0 bottom-0 w-[2px] sm:w-[2.5px] rounded-full transition-all duration-300 group-hover:shadow-[0_0_12px_rgba(247,164,0,0.8)]"
+                  style={{
+                    backgroundImage: "linear-gradient(to bottom, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
+                  }}
+                />
+
+                <div>
+                  <div 
+                    className="mb-1.5 sm:mb-3 transition-transform duration-300 w-fit group-hover:scale-110"
+                    style={{ color: "#F7A400" }}
+                  >
+                    {item.icon}
+                  </div>
+
+                  <h3 className="text-[14px] sm:text-[20px] font-bold tracking-tight mb-1 sm:mb-2 text-white group-hover:text-indigo-200 transition-colors duration-300 leading-snug">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-[11px] sm:text-[15px] text-white leading-snug sm:leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                    {item.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4th Part: Development Process Section */}
+      <section className="w-full bg-[#02050a] py-8 sm:py-16 lg:py-20 overflow-hidden relative text-white">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1400px] h-[400px] sm:h-[600px] bg-gradient-to-r from-[#ff7a33]/15 via-[#3b82f6]/15 to-[#00ffff]/10 rounded-full blur-[120px] sm:blur-[200px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_2px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:2rem_2rem] sm:bg-[size:2.5rem_2.5rem] pointer-events-none" />
+
+        <div className="max-w-[1445px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 sm:mb-16 gap-4 sm:gap-8">
+            <div className="max-w-[750px]">
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-1.5 rounded-full bg-[#0d1117] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] mb-3 sm:mb-6"
+              >
+                <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: "#F7A400" }} />
+                <span className="text-[11px] sm:text-[12px] md:text-[13px] font-bold tracking-wider text-white uppercase">
+                  Process
+                </span>
+              </motion.div>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-[24px] sm:text-[38px] md:text-[50px] font-extrabold tracking-tight leading-[1.25] sm:leading-[1.15] text-transparent bg-clip-text"
+                style={{ backgroundImage: "linear-gradient(to right, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)" }}
+              >
+                Our Simple & Transparent App Development Process
+              </motion.h2>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="max-w-[480px]"
+            >
+              <p className="text-[13px] sm:text-[14px] md:text-[15px] text-white/90 sm:text-white leading-relaxed">
+                Our app development process is designed to be simple, clear, and transparent at every stage. We begin by understanding the project requirements and planning the strategy, followed by user-friendly UX/UI design and efficient app development.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="w-full backdrop-blur-[20px] rounded-[10px] sm:rounded-[10px] border border-white/15 p-2.5 sm:p-6 lg:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] sm:shadow-[0_30px_80px_rgba(0,0,0,0.8)] flex flex-col lg:flex-row gap-2.5 sm:gap-4 items-stretch lg:h-[540px]">
+            {processSteps.map((step, index) => {
+              const isActive = activeStep === index;
+              const IconComponent = step.icon;
+
+              return (
+                <motion.div
+                  key={step.id}
+                  onClick={() => goTo(index)}
+                  layout={false}
+                  className={`cursor-pointer rounded-[10px] border relative overflow-hidden flex flex-col justify-between transition-all duration-300 ${
+                    isActive
+                      ? "lg:flex-[3.5] bg-[#02050a] border-white/25 p-4 sm:p-6 lg:p-8 shadow-2xl"
+                      : "lg:flex-[0.5] bg-[#02050a]/70 border-white/10 hover:border-white/25 hover:bg-[#02050a] p-3.5 sm:py-5 lg:py-6 sm:px-3 lg:items-center"
+                  }`}
+                >
+                  {isActive ? (
+                    <div className="flex flex-col h-full justify-between gap-3.5 sm:gap-5 relative z-10 w-full">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="flex items-center gap-2.5 sm:gap-3">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-[8px] sm:rounded-[10px] bg-[#F7A400] text-black font-black flex items-center justify-center text-[12px] sm:text-[14px] shadow-md shrink-0">
+                            {step.id}
+                          </div>
+                          <h3 className="text-[16px] sm:text-[19px] md:text-[21px] font-bold text-white tracking-tight">
+                            {step.title}
+                          </h3>
+                        </div>
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-black/70 backdrop-blur-md border border-white/20 flex items-center justify-center text-[#F7A400] shrink-0">
+                          <IconComponent size={16} className="sm:w-[18px] sm:h-[18px]" />
+                        </div>
+                      </div>
+
+                      <div className="relative w-full h-[150px] sm:h-[200px] lg:h-[230px] rounded-[8px] sm:rounded-[10px] overflow-hidden border border-white/10 shadow-lg shrink-0">
+                        <Image
+                          src="/assets/images/proces.png"
+                          alt={step.title}
+                          fill
+                          className="object-cover select-none transition-transform duration-700 hover:scale-105"
+                        />
+                      </div>
+
+                      <p className="text-[12px] sm:text-[13px] md:text-[14px] text-white/90 sm:text-white leading-relaxed">
+                        {step.description}
+                      </p>
+
+                      <div className="flex items-center justify-between pt-2.5 sm:pt-3 border-t border-white/10 mt-auto">
+                        <span className="text-[9px] sm:text-[11px] font-bold tracking-widest text-[#F7A400]/80 uppercase">
+                          STEP {activeStep + 1} OF {processSteps.length}
+                        </span>
+                        <div className="flex items-center gap-1.5 sm:gap-2">
+                          <button
+                            onClick={(e) => { e.stopPropagation(); goTo(activeStep - 1); }}
+                            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/15 flex items-center justify-center text-white hover:text-black hover:bg-[#F7A400] hover:border-[#F7A400] transition-all duration-300"
+                            aria-label="Previous step"
+                          >
+                            <ChevronLeft size={14} className="sm:w-[16px] sm:h-[16px]" />
+                          </button>
+                          <button
+                            onClick={(e) => { e.stopPropagation(); goTo(activeStep + 1); }}
+                            className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/15 flex items-center justify-center text-white hover:text-black hover:bg-[#F7A400] hover:border-[#F7A400] transition-all duration-300"
+                            aria-label="Next step"
+                          >
+                            <ChevronRight size={14} className="sm:w-[16px] sm:h-[16px]" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-row lg:flex-col items-center justify-between h-full select-none w-full gap-3 lg:gap-0">
+                      <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-[8px] sm:rounded-[10px] flex items-center justify-center font-black text-[11px] sm:text-[13px] bg-white/5 text-white/60 shrink-0">
+                        {step.id}
+                      </div>
+
+                      <div className="my-auto py-1 lg:py-4 flex items-center justify-center">
+                        <h4
+                          className="text-[13px] sm:text-[15px] lg:text-[16px] font-bold tracking-wider text-white group-hover:text-white/90 whitespace-nowrap block lg:[writing-mode:vertical-rl] lg:[transform:rotate(180deg)]"
+                        >
+                          {step.title}
+                        </h4>
+                      </div>
+
+                      <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center bg-white/5 text-white shrink-0">
+                        <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:transform lg:-rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 5th Part: FAQ Section */}
+      <section className="w-full py-8 sm:py-20 lg:py-28 relative overflow-hidden bg-[#02050A]">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#02050A_0%,#02050A_50%,#02050A_100%)] pointer-events-none" />
+
+        <div className="max-w-[1445px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+
+            <div className="lg:col-span-5 lg:sticky lg:top-32">
+              <h2 className="text-[26px] sm:text-[32px] md:text-[36px] xl:text-[42px] font-semibold tracking-tight leading-[1.25] lg:leading-[1.1] mb-4 sm:mb-6 bg-[linear-gradient(90deg,#FFDDA1_0%,#F7A400_50%,#FFDDA1_100%)] bg-clip-text text-transparent">
+                Frequently Asked Questions
+              </h2>
+
+              <p className="text-white text-[15px] sm:text-[18px] md:text-[20px] leading-relaxed mb-6 sm:mb-8 max-w-5xl">
+                We are here to help you with any questions you may have.
+              </p>
+
+              <div className="relative mb-6 sm:mb-8 max-w-md w-full">
+                <Search size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input
+                  type="text"
+                  value={query}
+                  onChange={(e) => {
+                    setOpenIndex(null);
+                    setQuery(e.target.value);
+                  }}
+                  placeholder="Search your question..."
+                  className="w-full pl-11 pr-4 py-3 sm:py-3.5 rounded-full bg-[#12161D] border border-white/10 text-[13px] sm:text-[14px] text-white placeholder:text-gray-500 focus:outline-none focus:border-[#F7A400]/50 transition-colors shadow-inner"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-4 text-[12px] sm:text-[13px] md:text-[15px]">
+                <button className="bg-[linear-gradient(90deg,#FFDDA1_0%,#F7A400_100%)] text-gray-950 font-bold px-3.5 sm:px-7 py-3 sm:py-3.5 rounded-full hover:opacity-95 transition-all shadow-[0_10px_25px_rgba(247,164,0,0.25)] flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer text-center">
+                  <span>Speak to an expert</span>
+                </button>
+
+                <button className="bg-[linear-gradient(90deg,#FFDDA1_0%,#F7A400_100%)] text-gray-950 font-bold px-3.5 sm:px-7 py-3 sm:py-3.5 rounded-full hover:opacity-95 transition-all shadow-[0_10px_25px_rgba(247,164,0,0.25)] flex items-center justify-center gap-1.5 sm:gap-2 cursor-pointer text-center">
+                  <span>Read more FAQs</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="lg:col-span-7 space-y-3 sm:space-y-4">
+              {filtered.length === 0 && (
+                <div className="text-center py-12 sm:py-16 rounded-[16px] border border-dashed border-white/10 bg-[#12161D]/50 px-4">
+                  <p className="text-gray-400 text-[14px] sm:text-[15px]">
+                    No questions found for <span className="text-white font-semibold">"{query}"</span>
+                  </p>
+                </div>
+              )}
+
+              {filtered.map((faq, index) => {
+                const isOpen = openIndex === index;
+                return (
+                  <div
+                    key={faq.question}
+                    className={`relative bg-[#12161D] border rounded-[16px] sm:rounded-[20px] overflow-hidden transition-colors duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.25)] ${
+                      isOpen ? "border-[#F7A400]/40" : "border-white/10"
+                    }`}
+                  >
+                    <div
+                      className="absolute left-0 top-0 bottom-0 w-[4px] transition-all duration-300"
+                      style={{ background: isOpen ? "#F7A400" : "transparent" }}
+                    />
+
+                    <button
+                      onClick={() => toggleFAQ(index)}
+                      className="w-full flex items-center justify-between p-4 sm:p-6 text-left focus:outline-none cursor-pointer"
+                    >
+                      <div className="flex items-start gap-3 sm:gap-4 pr-2 sm:pr-4">
+                        <span
+                          className={`text-[13px] md:text-[14px] lg:text-[16px] xl:text-[18px] font-bold shrink-0 pt-0.5 transition-colors duration-300 ${
+                            isOpen ? "text-[#F7A400]" : "text-white/25"
+                          }`}
+                        >
+                          {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <span className="text-[15px] sm:text-[18px] lg:text-[20px] xl:text-[22px] font-medium text-white leading-snug sm:leading-normal">
+                          {faq.question}
+                        </span>
+                      </div>
+                      <motion.span
+                        animate={{ rotate: isOpen ? 135 : 0 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 border transition-colors duration-300 ${
+                          isOpen
+                            ? "bg-[#F7A400] border-[#F7A400] text-black font-bold"
+                            : "bg-white/5 border-white/10 text-white"
+                        }`}
+                      >
+                        <Plus size={16} />
+                      </motion.span>
+                    </button>
+
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-4 pb-4 sm:px-6 sm:pb-6 pl-[42px] sm:pl-[62px] text-white/90 text-[13px] sm:text-[14px] lg:text-[16px] leading-relaxed border-t border-white/5 pt-3 sm:pt-4">
+                            {faq.answer}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              })}
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <style jsx>{`
+        @keyframes shine {
+          to {
+            background-position: 200% center;
+          }
+        }
+      `}</style>
+    </div>
+  );
+}
