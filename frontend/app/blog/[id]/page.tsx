@@ -515,12 +515,8 @@ export default function BlogDetailsPage() {
                   <h5 className="text-xs font-bold text-white">{c.name}</h5>
                   <span className="text-[11px] text-gray-500">{c.time}</span>
                 </div>
-                <p className="text-sm text-gray-300">{c.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
+            </div>
+        </section>
       </div>
 
       <FAQSection />
