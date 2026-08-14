@@ -35,7 +35,7 @@ const serviceFeatures = [
 
 export default function ServiceHero() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#02050A] py-20 font-poppins text-white sm:py-24 lg:py-32">
+    <section className="relative w-full overflow-hidden bg-[#02050A] py-16 font-poppins text-white sm:py-24 lg:py-32">
       
       {/* Background Gradient Fade */}
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#02050a] via-[#02050a]/80 to-transparent pointer-events-none" />
@@ -48,21 +48,21 @@ export default function ServiceHero() {
       <div className="relative z-20 mx-auto max-w-[1445px] px-4 sm:px-6 lg:px-10">
         
         {/* HERO CONTENT */}
-        <div className="mx-auto max-w-[900px] text-center">
+        <div className="mx-auto max-w-[950px] text-center">
           
           {/* Badge */}
-          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#F7A400]/30 bg-[#0B1017]/90 px-4 py-2 shadow-lg backdrop-blur-md">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#F7A400]/30 bg-[#0B1017]/90 px-4 py-2 shadow-lg backdrop-blur-md">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full rounded-full bg-[#F7A400] opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#F7A400]" />
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FFDDA1] sm:text-xs">
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#FFDDA1] sm:text-xs">
               Next-Gen IT Solutions & AI Innovation
             </span>
           </div>
 
           {/* Heading */}
-          <h1 className="text-[40px] font-extrabold leading-[1.06] tracking-[-0.035em] sm:text-5xl md:text-6xl lg:text-[76px]">
+          <h1 className="text-[30px] sm:text-[36px] lg:text-[42px] font-semibold leading-[1.12] tracking-[-0.035em]">
             Software Development &
             <br />
             <span className="bg-gradient-to-r from-[#FFDDA1] via-[#F7A400] to-[#FF8800] bg-clip-text text-transparent">
@@ -71,17 +71,17 @@ export default function ServiceHero() {
           </h1>
 
           {/* Description */}
-          <p className="mx-auto mt-6 max-w-[700px] text-base leading-7 text-zinc-400 sm:text-lg sm:leading-8">
+          <p className="mx-auto mt-5 max-w-[720px] text-[16px] sm:text-[18px] lg:text-[20px] leading-[1.6] sm:leading-[1.7] text-white">
             We help startups and enterprises build powerful digital products with custom software development, AI solutions, mobile apps, and web platforms.
           </p>
 
           {/* CTA */}
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="#get-started"
               className="
                 group inline-flex w-full items-center justify-center gap-3
-                rounded-2xl
+                rounded-full
                 bg-gradient-to-r from-[#FFDDA1] to-[#F7A400]
                 px-8 py-4
                 text-sm font-extrabold text-black
@@ -99,7 +99,7 @@ export default function ServiceHero() {
               href="#contact"
               className="
                 inline-flex w-full items-center justify-center gap-2
-                rounded-2xl
+                rounded-full
                 border border-white/15
                 bg-[#0B1017]/80
                 px-8 py-4
@@ -117,7 +117,7 @@ export default function ServiceHero() {
         </div>
 
         {/* METRICS OVERVIEW BAR */}
-        <div className="mx-auto mt-20 max-w-[1100px] rounded-3xl border border-white/10 bg-[#070b12]/85 p-6 backdrop-blur-2xl shadow-2xl">
+        <div className="mx-auto mt-16 max-w-[1100px] rounded-3xl border border-white/10 bg-[#070b12]/85 p-6 backdrop-blur-2xl shadow-2xl">
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-4 items-center">
             
             {/* Experience */}
@@ -126,10 +126,10 @@ export default function ServiceHero() {
                 <FiBookOpen className="h-5 w-5 text-[#F7A400]" />
               </div>
               <div className="text-left">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                <p className="text-[10px] md:text-[14px] font-bold tracking-wider text-white">
                   Experience
                 </p>
-                <p className="text-sm font-extrabold text-white">
+                <p className="text-[8px] md:text-[12px] font-semibold text-white">
                   14+ Years
                 </p>
               </div>
@@ -141,10 +141,10 @@ export default function ServiceHero() {
                 <FiEdit3 className="h-5 w-5 text-emerald-400" />
               </div>
               <div className="text-left">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                <p className="text-[10px] md:text-[14px] font-bold tracking-wider text-white">
                   Expertise
                 </p>
-                <p className="text-sm font-extrabold text-white">
+                <p className="text-[8px] md:text-[12px] font-semibold text-white">
                   AI & Enterprise
                 </p>
               </div>
@@ -156,10 +156,10 @@ export default function ServiceHero() {
                 <FiTrendingUp className="h-5 w-5 text-blue-400" />
               </div>
               <div className="text-left">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                <p className="text-[10px] md:text-[14px] font-bold tracking-wider text-white">
                   Solutions
                 </p>
-                <p className="text-sm font-extrabold text-white">
+                <p className="text-[8px] md:text-[12px] font-semibold text-white">
                   Scalable IT
                 </p>
               </div>
@@ -168,15 +168,15 @@ export default function ServiceHero() {
             {/* Ratings */}
             <div className="flex items-center gap-3 sm:border-l sm:border-white/10 sm:pl-6">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5 shadow-inner">
-                <span className="text-xs font-black text-[#FFDDA1]">
+                <span className="text-[10px] font-black text-[#FFDDA1]">
                   4.9
                 </span>
               </div>
               <div className="text-left">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                <p className="text-[10px] md:text-[14px] font-bold tracking-wider text-white">
                   Client Rating
                 </p>
-                <p className="text-sm font-extrabold text-white">
+                <p className="text-[8px] md:text-[12px] font-semibold text-white">
                   3,595+ Ratings
                 </p>
               </div>
@@ -213,10 +213,10 @@ export default function ServiceHero() {
                   </div>
 
                   <div>
-                    <h3 className="text-base font-bold text-white group-hover:text-[#FFDDA1] transition-colors">
+                    <h3 className="text-[10px] md:text-[14px] font-bold text-white transition-colors">
                       {feature.title}
                     </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+                    <p className="mt-2 text-[8px] md:text-[12px] leading-relaxed text-white">
                       {feature.description}
                     </p>
                   </div>

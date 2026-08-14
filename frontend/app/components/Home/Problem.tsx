@@ -122,7 +122,7 @@ export default function TestimonialSliderSection() {
 
   return (
     <section
-      className="w-full py-6 lg:py-28 relative overflow-hidden bg-[#02050A]"
+      className="w-full py-6 lg:py-28 relative overflow-hidden bg-[#02050A] -mt-2"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >

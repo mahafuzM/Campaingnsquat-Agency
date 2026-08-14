@@ -79,7 +79,7 @@ export default function TechTicker() {
         {/* ROW 2: Single Alternating Running Devices (Border removed) */}
         <div className="relative w-full flex items-center overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
           <motion.div 
-            className="flex items-center gap-2 sm:gap-8 min-w-max py-2 md:py-4" 
+            className="flex items-center gap-4 sm:gap-8 min-w-max py-2 md:py-4" 
             animate={{ x: ["-50%", "0%"] }} 
             transition={{ repeat: Infinity, duration: 42, ease: "linear" }}
           >

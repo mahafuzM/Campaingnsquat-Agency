@@ -36,9 +36,9 @@ const contactFeatures = [
 
 export default function SimpleContactHero() {
   return (
-    <section className="relative w-full overflow-hidden bg-[#02050A] py-20 font-poppins text-white sm:py-24 lg:py-32">
+    <section className="relative w-full overflow-hidden bg-[#02050A] py-16 font-poppins text-white sm:py-24 lg:py-32">
       
-      {/* Background Gradient Fade (নিচ থেকে ওপরের দিকে গাঢ় থেকে হালকা ফেড) */}
+      {/* Background Gradient Fade */}
       <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#02050a] via-[#02050a]/80 to-transparent pointer-events-none" />
 
       {/* Background Creative Multi-Layer Glow & Grid Effects */}
@@ -50,22 +50,22 @@ export default function SimpleContactHero() {
         
         {/* =====================================================
             HERO CONTENT
-        ====================================================== */}
-        <div className="mx-auto max-w-[900px] text-center">
+        ===================================================== */}
+        <div className="mx-auto max-w-[950px] text-center">
           
           {/* Badge */}
-          <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#F7A400]/30 bg-[#0B1017]/90 px-4 py-2 shadow-lg backdrop-blur-md">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#F7A400]/30 bg-[#0B1017]/90 px-4 py-2 shadow-lg backdrop-blur-md">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full rounded-full bg-[#F7A400] opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#F7A400]" />
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#FFDDA1] sm:text-xs">
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#FFDDA1] sm:text-xs">
               Get In Touch With Us
             </span>
           </div>
 
           {/* Heading */}
-          <h1 className="text-[40px] font-extrabold leading-[1.06] tracking-[-0.035em] sm:text-5xl md:text-6xl lg:text-[76px]">
+          <h1 className="text-[30px] sm:text-[36px] lg:text-[42px] font-semibold leading-[1.12] tracking-[-0.035em]">
             Let's Build Something
             <br />
             <span className="bg-gradient-to-r from-[#FFDDA1] via-[#F7A400] to-[#FF8800] bg-clip-text text-transparent">
@@ -74,17 +74,17 @@ export default function SimpleContactHero() {
           </h1>
 
           {/* Description */}
-          <p className="mx-auto mt-6 max-w-[700px] text-base leading-7 text-zinc-400 sm:text-lg sm:leading-8">
+          <p className="mx-auto mt-5 max-w-[720px] text-[16px] sm:text-[18px] lg:text-[20px] leading-[1.6] sm:leading-[1.7] text-white">
             Have a project in mind or want to learn more about our enterprise solutions? Reach out to our team and let's start a conversation.
           </p>
 
           {/* CTA */}
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="#contact-form"
               className="
                 group inline-flex w-full items-center justify-center gap-3
-                rounded-2xl
+                rounded-full
                 bg-gradient-to-r from-[#FFDDA1] to-[#F7A400]
                 px-8 py-4
                 text-sm font-extrabold text-black
@@ -102,7 +102,7 @@ export default function SimpleContactHero() {
               href="#faq"
               className="
                 inline-flex w-full items-center justify-center gap-2
-                rounded-2xl
+                rounded-full
                 border border-white/15
                 bg-[#0B1017]/80
                 px-8 py-4
@@ -121,8 +121,8 @@ export default function SimpleContactHero() {
 
         {/* =====================================================
             CONTACT OVERVIEW BAR (Metrics)
-        ====================================================== */}
-        <div className="mx-auto mt-20 max-w-[1100px] rounded-3xl border border-white/10 bg-[#070b12]/85 p-6 backdrop-blur-2xl shadow-2xl">
+        ===================================================== */}
+        <div className="mx-auto mt-16 max-w-[1100px] rounded-3xl border border-white/10 bg-[#070b12]/85 p-6 backdrop-blur-2xl shadow-2xl">
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-4 items-center">
             
             {/* Response Time */}
@@ -131,10 +131,10 @@ export default function SimpleContactHero() {
                 <FiClock className="h-5 w-5 text-[#F7A400]" />
               </div>
               <div className="text-left">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                <p className="text-[10px] md:text-[14px] font-bold tracking-wider text-white">
                   Response Time
                 </p>
-                <p className="text-sm font-extrabold text-white">
+                <p className="text-[8px] md:text-[12px] font-semibold text-white">
                   Under 24 Hours
                 </p>
               </div>
@@ -146,10 +146,10 @@ export default function SimpleContactHero() {
                 <FiMail className="h-5 w-5 text-emerald-400" />
               </div>
               <div className="text-left">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                <p className="text-[10px] md:text-[14px] font-bold tracking-wider text-white">
                   Email Us
                 </p>
-                <p className="text-sm font-extrabold text-white">
+                <p className="text-[8px] md:text-[12px] font-semibold text-white">
                   support@vudai.com
                 </p>
               </div>
@@ -161,10 +161,10 @@ export default function SimpleContactHero() {
                 <FiPhoneCall className="h-5 w-5 text-blue-400" />
               </div>
               <div className="text-left">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                <p className="text-[10px] md:text-[14px] font-bold tracking-wider text-white">
                   Call Line
                 </p>
-                <p className="text-sm font-extrabold text-white">
+                <p className="text-[8px] md:text-[12px] font-semibold text-white">
                   +1 (555) 019-2834
                 </p>
               </div>
@@ -173,15 +173,15 @@ export default function SimpleContactHero() {
             {/* Availability */}
             <div className="flex items-center gap-3 sm:border-l sm:border-white/10 sm:pl-6">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5 shadow-inner">
-                <span className="text-xs font-black text-[#FFDDA1]">
+                <span className="text-[10px] font-black text-[#FFDDA1]">
                   24/7
                 </span>
               </div>
               <div className="text-left">
-                <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+                <p className="text-[10px] md:text-[14px] font-bold tracking-wider text-white">
                   Availability
                 </p>
-                <p className="text-sm font-extrabold text-white">
+                <p className="text-[8px] md:text-[12px] font-semibold text-white">
                   Always Open
                 </p>
               </div>
@@ -192,7 +192,7 @@ export default function SimpleContactHero() {
 
         {/* =====================================================
             FEATURE CARDS (Contact Highlights)
-        ====================================================== */}
+        ===================================================== */}
         <div className="mx-auto mt-8 grid max-w-[1100px] grid-cols-1 gap-6 md:grid-cols-3">
           {contactFeatures.map((feature) => {
             const Icon = feature.icon;
@@ -220,10 +220,10 @@ export default function SimpleContactHero() {
                   </div>
 
                   <div>
-                    <h3 className="text-base font-bold text-white group-hover:text-[#FFDDA1] transition-colors">
+                    <h3 className="text-[10px] md:text-[14px] font-bold text-white transition-colors">
                       {feature.title}
                     </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-zinc-400">
+                    <p className="mt-2 text-[8px] md:text-[12px] leading-relaxed text-white">
                       {feature.description}
                     </p>
                   </div>
