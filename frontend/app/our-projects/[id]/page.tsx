@@ -1,89 +1,400 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
-import Link from "next/link";
+import React, { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { Fraunces, Manrope, IBM_Plex_Mono } from "next/font/google";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { motion } from "framer-motion";
 import {
   FiArrowLeft,
-  FiArrowRight,
-  FiCheck,
-  FiMessageSquare as FiQuote,
-  FiSearch as Search,
-  FiPlus as Plus,
-  FiStar as FiSparkles,
-  FiLayers,
-  FiCpu,
+  FiCheckCircle,
+  FiClock,
   FiShield,
+  FiCpu,
+  FiZap,
 } from "react-icons/fi";
+import {
+  Plus,
+  ArrowRight,
+  Star,
+  Layers,
+  Users,
+  BarChart3,
+  ShieldCheck,
+  ExternalLink,
+  Search,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  MessageSquare,
+  Cpu,
+  Check,
+} from "lucide-react";
 
-const display = Fraunces({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal"],
-  variable: "--font-display",
-});
-const body = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-body",
-});
-const mono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
-});
+// Utility for gradient text style
+const gradientTextStyle = {
+  background: "linear-gradient(90deg, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+};
 
-const projectMeta = [
-  { label: "Client", value: "Farmer Care Global", icon: FiShield },
-  { label: "Launch", value: "2025 / Q4", icon: FiSparkles },
-  { label: "Industry", value: "Agricultural FinTech", icon: FiLayers },
-  { label: "Architecture", value: "Next.js App Router", icon: FiCpu },
-];
+// ==========================================
+// HERO HEADER SECTION COMPONENT
+// ==========================================
 
-const servicesProvided = [
-  "Brand Identity & Art Direction",
-  "UI/UX Wireframing & Prototyping",
-  "Full-Stack Custom Development",
-  "SEO & Performance Optimization",
-];
+function HeroHeaderSection() {
+  return (
+    <section className="w-full pt-[40px] sm:pt-[60px] pb-[32px] sm:pb-[48px] relative z-25">
+      <div className="max-w-[1445px] w-full mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Back Button */}
+        <div className="mb-[24px]">
+          <Link
+            href="/our-projects"
+            className="inline-flex items-center gap-[10px] bg-white/[0.04] backdrop-blur-xl border border-white/10 hover:border-[#F7A400]/50 text-zinc-300 hover:text-white px-[16px] py-[10px] rounded-[30px] text-[13px] font-medium transition-all group shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
+          >
+            <FiArrowLeft className="group-hover:-translate-x-1 transition-transform text-[#F7A400]" size={15} />
+            <span>Back to Projects</span>
+          </Link>
+        </div>
 
-const techStack = [
-  "Next.js App Router",
-  "Tailwind CSS",
-  "Framer Motion",
-  "Node.js",
-  "PostgreSQL",
-  "Figma Design System",
-];
+        <h1 
+          className="text-[30px] sm:text-[36px] lg:text-[42px] font-bold tracking-tight leading-[1.1] mb-[20px] sm:mb-[24px]"
+          style={gradientTextStyle}
+        >
+          Farmer Care,<span className="text-[#F7A400]"> designed for trust.</span>
+        </h1>
+        <p className="text-zinc-400 text-[15px] sm:text-[18px] lg:text-[22px] leading-[1.6] max-w-[1150px]">
+          A high-impact, dual-sided digital architecture connecting rural producers with dynamic markets, transparent financial credit, and modern telemetry—engineered for extreme clarity and sub-second execution in the field.
+        </p>
+      </div>
+    </section>
+  );
+}
 
-const featuredCreativeItems = [
+// ==========================================
+// PROJECT METADATA BAR COMPONENT
+// ==========================================
+
+function ProjectMetaBar() {
+  const metaItems = [
+    {
+      icon: ShieldCheck,
+      label: "Company Name",
+      value: "Farmer Care Global",
+    },
+    {
+      icon: Star,
+      label: "LAUNCH",
+      value: "2025 / Q4",
+    },
+    {
+      icon: Layers,
+      label: "INDUSTRY",
+      value: "Agricultural FinTech",
+    },
+    {
+      icon: Cpu,
+      label: "ARCHITECTURE",
+      value: "Next.js App Router",
+    },
+  ];
+
+  return (
+    <section className="w-full relative z-20 mb-[32px] sm:mb-[64px]">
+      <div className="max-w-[1445px] w-full mx-auto px-2 sm:px-6 lg:px-8">
+        <div className="bg-white/[0.03] backdrop-blur-2xl  rounded-[16px] grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+          {metaItems.map((item, index) => {
+            const IconComponent = item.icon;
+            return (
+              <div
+                key={index}
+                className="p-[20px] sm:p-[24px] lg:p-[28px] flex flex-col justify-between"
+              >
+                <div className="flex items-center gap-[8px] mb-[8px]">
+                  <IconComponent size={14} className="text-[#F7A400]" />
+                  <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.2em] font-medium text-zinc-400">
+                    {item.label}
+                  </span>
+                </div>
+                <div className="text-[16px] sm:text-[18px] lg:text-[20px] font-semibold text-white tracking-tight">
+                  {item.value}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ==========================================
+// PROJECT INTRO & THE CHALLENGE SECTION
+// ==========================================
+
+function ProjectIntroChallengeSection() {
+  return (
+    <section className="w-full py-[32px] sm:py-[54px] relative overflow-hidden z-10">
+      <div className="max-w-[1445px] w-full mx-auto px-2 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[32px] sm:gap-[48px] lg:gap-[64px]">
+          
+          {/* Project Intro Card - Unique Tint 1 (Blue/Cyan Glass) - Bottom footer removed */}
+          <div className="bg-[linear-gradient(135deg,rgba(14,24,43,0.4)_0%,rgba(10,37,64,0.4)_100%)] backdrop-blur-2xl  rounded-[10px] p-[28px] sm:p-[40px] lg:p-[48px] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute -top-24 -left-24 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-[12px]">
+                <span className="w-[18px] h-[1px] bg-[#38bdf8]" />
+                <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.2em] font-medium text-[#38bdf8]">
+                  PROJECT INTRO
+                </span>
+              </div>
+              <h2 className="text-[24px] sm:text-[32px] font-bold tracking-tight mb-[16px]" style={gradientTextStyle}>
+                Empowering Rural Ecosystems
+              </h2>
+              <p className="text-zinc-300 text-[14px] sm:text-[16px] leading-[1.7]">
+                Farmer Care represents a paradigm shift in rural agricultural infrastructure, bridging the gap between independent growers and digital financial markets through an intuitive, robust web portal.
+              </p>
+            </div>
+          </div>
+
+          {/* The Challenge Card - Unique Tint 2 (Amber/Gold Glass) - Bottom footer removed */}
+          <div className="bg-[linear-gradient(135deg,rgba(36,24,12,0.4)_0%,rgba(43,28,10,0.4)_100%)] backdrop-blur-2xl  rounded-[10px] p-[28px] sm:p-[40px] lg:p-[48px] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute -top-24 -left-24 w-48 h-48 bg-[#F7A400]/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-[12px]">
+                <span className="w-[18px] h-[1px] bg-[#F7A400]" />
+                <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.2em] font-medium text-[#F7A400]">
+                  THE CHALLENGE
+                </span>
+              </div>
+              <h2 className="text-[24px] sm:text-[32px] font-bold tracking-tight mb-[16px]" style={gradientTextStyle}>
+                Overcoming Field Friction
+              </h2>
+              <p className="text-zinc-300 text-[14px] sm:text-[16px] leading-[1.7]">
+                Traditional micro-credit approval workflows suffered from high drop-off rates due to complex paper documentation, poor low-bandwidth connectivity, and fragmented commodity market pricing updates.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ==========================================
+// SOLUTION SECTION COMPONENT
+// ==========================================
+
+function SolutionSection() {
+  return (
+    <section className="w-full py-[32px] sm:py-[54px] relative overflow-hidden z-10">
+      <div className="max-w-[1445px] w-full mx-auto px-2 sm:px-6 lg:px-8 relative z-10">
+        {/* Solution Card - Unique Tint 3 (Purple/Violet Glass) - 3 items footer removed */}
+        <div className="bg-[linear-gradient(135deg,rgba(26,16,42,0.4)_0%,rgba(37,16,43,0.4)_100%)] backdrop-blur-2xl  rounded-[10px] p-[32px] sm:p-[50px] lg:p-[64px] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] relative overflow-hidden">
+          
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+          <div className="max-w-[900px] relative z-10">
+            <div className="flex items-center gap-2 mb-[12px]">
+              <span className="w-[18px] h-[1px] bg-purple-400" />
+              <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.2em] font-medium text-purple-400">
+                THE SOLUTION
+              </span>
+            </div>
+
+            <h2 className="text-[28px] sm:text-[40px] font-bold tracking-tight mb-[20px] leading-[1.2]" style={gradientTextStyle}>
+              A Unified Architecture Built for Rural Scale
+            </h2>
+
+            <p className="text-zinc-300 text-[15px] sm:text-[18px] leading-[1.7]">
+              We engineered a streamlined, offline-resilient web architecture utilizing Next.js App Router and modular Tailwind components. By consolidating micro-credit verification, weather sync, and dynamic market lookup into a unified interface, we removed field friction entirely.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ==========================================
+// CORE MODULES SHIPPED SECTION COMPONENT
+// ==========================================
+
+const coreModules = [
   {
     title: "Algorithmic Dynamic Search",
-    description:
-      "Instant agricultural commodity lookup with real-time filtering and faceted rural market navigation.",
-    active: false,
+    description: "Instant agricultural commodity lookup with real-time filtering and faceted rural market navigation.",
+    tint: "hover:border-cyan-400/50 hover:bg-[linear-gradient(135deg,rgba(14,24,43,0.5)_0%,rgba(10,37,64,0.5)_100%)]",
+    activeTint: "bg-[linear-gradient(135deg,rgba(14,24,43,0.6)_0%,rgba(10,37,64,0.6)_100%)] border-cyan-400/60 shadow-[0_0_30px_rgba(56,189,248,0.15)]",
+    accentColor: "text-cyan-400",
+    bgAccent: "bg-cyan-400",
   },
   {
     title: "Multi-Step Secure Micro-Credits",
-    description:
-      "Frictionless loan application flow with encrypted biometric and identity gateway integration.",
-    active: true,
+    description: "Frictionless loan application flow with encrypted biometric and identity gateway integration.",
+    tint: "hover:border-amber-400/50 hover:bg-[linear-gradient(135deg,rgba(36,24,12,0.5)_0%,rgba(43,28,10,0.5)_100%)]",
+    activeTint: "bg-[linear-gradient(135deg,rgba(36,24,12,0.6)_0%,rgba(43,28,10,0.6)_100%)] border-amber-400/60 shadow-[0_0_30px_rgba(247,164,0,0.15)]",
+    accentColor: "text-amber-400",
+    bgAccent: "bg-amber-400",
   },
   {
     title: "Real-time Yield & Weather Sync",
-    description:
-      "Automated satellite telemetry updates mapped directly to localized crop price indexes.",
-    active: false,
+    description: "Automated satellite telemetry updates mapped directly to localized crop price indexes.",
+    tint: "hover:border-purple-400/50 hover:bg-[linear-gradient(135deg,rgba(26,16,42,0.5)_0%,rgba(37,16,43,0.5)_100%)]",
+    activeTint: "bg-[linear-gradient(135deg,rgba(26,16,42,0.6)_0%,rgba(37,16,43,0.6)_100%)] border-purple-400/60 shadow-[0_0_30px_rgba(192,132,252,0.15)]",
+    accentColor: "text-purple-400",
+    bgAccent: "bg-purple-400",
   },
   {
     title: "Responsive Offline-First Dashboard",
-    description:
-      "Custom progressive web panel engineered to sync seamlessly on low-bandwidth cellular networks.",
-    active: false,
+    description: "Custom progressive web panel engineered to sync seamlessly on low-bandwidth cellular networks.",
+    tint: "hover:border-emerald-400/50 hover:bg-[linear-gradient(135deg,rgba(10,36,26,0.5)_0%,rgba(10,43,33,0.5)_100%)]",
+    activeTint: "bg-[linear-gradient(135deg,rgba(10,36,26,0.6)_0%,rgba(10,43,33,0.6)_100%)] border-emerald-400/60 shadow-[0_0_30px_rgba(52,211,153,0.15)]",
+    accentColor: "text-emerald-400",
+    bgAccent: "bg-emerald-400",
   },
 ];
+
+function CoreModulesSection() {
+  const [activeIndex, setActiveIndex] = useState(1);
+
+  return (
+    <section className="w-full py-[32px] sm:py-[64px] relative overflow-hidden z-10">
+      <div className="max-w-[1445px] w-full mx-auto px-2 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-[36px] lg:gap-[64px] items-center">
+          
+          {/* Left Column: Heading & Description */}
+          <div className="lg:col-span-5">
+            <div className="flex items-center gap-2 mb-[12px]">
+              <span className="w-[18px] h-[1px] bg-[#F7A400]" />
+              <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.2em] font-medium text-[#F7A400]">
+                CORE MODULES SHIPPED
+              </span>
+            </div>
+
+            <h2 className="text-[26px] sm:text-[32px] lg:text-[38px] font-bold tracking-tight leading-[1.15] mb-[20px]" style={gradientTextStyle}>
+              Core modules shipped.
+            </h2>
+
+            <p className="text-zinc-300 text-[14px] sm:text-[18px] leading-[1.6]">
+              Four primary architectural components carried the heaviest UX weight—prioritizing frictionless micro-credit processing above all.
+            </p>
+          </div>
+
+          {/* Right Column: Interactive Modules List */}
+          <div className="lg:col-span-7 space-y-[16px]">
+            {coreModules.map((module, index) => {
+              const isActive = activeIndex === index;
+
+              return (
+                <div
+                  key={index}
+                  onClick={() => setActiveIndex(index)}
+                  className={`cursor-pointer transition-all duration-300 rounded-[10px] p-[20px] sm:p-[24px] border backdrop-blur-2xl ${
+                    isActive
+                      ? module.activeTint
+                      : `bg-white/[0.02] border-white/10 ${module.tint}`
+                  }`}
+                >
+                  <div className="flex items-start gap-[16px]">
+                    <div
+                      className={`w-[24px] h-[24px] rounded-full flex items-center justify-center shrink-0 mt-[2px] transition-colors ${
+                        isActive
+                          ? `${module.bgAccent} text-black`
+                          : "border border-white/20 text-transparent"
+                      }`}
+                    >
+                      <Check size={14} className={isActive ? "text-black" : "opacity-0"} />
+                    </div>
+
+                    <div>
+                      <h3
+                        className={`text-[16px] sm:text-[18px] font-semibold mb-[6px] tracking-tight transition-colors ${
+                          isActive ? module.accentColor : "text-white"
+                        }`}
+                      >
+                        {module.title}
+                      </h3>
+                      <p className="text-zinc-300 text-[13px] sm:text-[15px] leading-[1.5]">
+                        {module.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ==========================================
+// RESULTS & IMPACT COMPONENT
+// ==========================================
+
+function ResultsTestimonialSection() {
+  return (
+    <section className="w-full py-[32px] sm:py-[64px] relative overflow-hidden z-10">
+      <div className="max-w-[1445px] w-full mx-auto px-2 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Section Header */}
+        <div className="mb-[28px] sm:mb-[40px]">
+          <div className="flex items-center gap-2 mb-[12px]">
+            <span className="w-[18px] h-[1px] bg-[#F7A400]" />
+            <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.2em] font-medium text-[#F7A400]">
+              RESULTS & IMPACT
+            </span>
+          </div>
+
+          <p className="text-[16px] sm:text-[22px] lg:text-[26px]  leading-[1.2] max-w-[1000px]" style={gradientTextStyle}>
+            Achieved a 45% increase in active organic retention rates and successfully brought transaction drop-off to near-zero within the primary initial deployment cycle.
+          </p>
+        </div>
+
+        {/* Testimonial Card - Unique Tint 4 (Teal/Emerald Glass) */}
+        <div className="relative bg-[linear-gradient(135deg,rgba(10,36,26,0.4)_0%,rgba(16,42,37,0.4)_100%)] backdrop-blur-2xl  rounded-[16px] p-[10px] sm:p-[40px] lg:p-[48px] overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+          
+          <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Background Decorative Quote Watermark */}
+          <MessageSquare className="absolute right-[-20px] bottom-[-20px] text-white/[0.03] w-[180px] h-[180px] sm:w-[240px] sm:h-[240px] pointer-events-none select-none" />
+
+          <blockquote className="relative z-10">
+            <p className="text-zinc-200 text-[16px] sm:text-[22px] lg:text-[24px] leading-[1.5] font-normal mb-[28px] sm:mb-[36px]">
+              &ldquo;Working with the team was an absolute game-changer. Their rigorous focus on both complex backend efficiency and elegant rural user experience exceeded every milestone.&rdquo;
+            </p>
+
+            <footer className="flex items-center gap-[14px]">
+              <div className="flex flex-col">
+                <div className="flex items-center gap-[10px] mb-[4px]">
+                  <span className="w-[20px] h-[1px] bg-emerald-400" />
+                  <cite className="not-italic text-white font-semibold text-[14px] sm:text-[16px]">
+                    Alex Morgan
+                  </cite>
+                </div>
+                <span className="text-zinc-300 text-[12px] sm:text-[14px] pl-[30px]">
+                  Founder & Chief Executive Officer, Farmer Care Global
+                </span>
+              </div>
+            </footer>
+          </blockquote>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+// ==========================================
+// FAQ DATA & COMPONENT
+// ==========================================
 
 const faqs = [
   {
@@ -94,563 +405,262 @@ const faqs = [
   {
     question: "How was the Atomic Design system implemented?",
     answer:
-      "We broke down interface components from basic atoms (buttons, inputs) to complex organisms, ensuring high design consistency across both the public-facing farmer portal and the internal administrative dashboard.",
+      "We built a scalable component library starting from atomic elements up to complex organisms, ensuring design consistency and rapid developer handoff across platforms.",
   },
   {
     question: "What technologies were used for prototyping and design handoff?",
     answer:
-      "The design system, interactive wireframes, and high-fidelity mockups were built entirely in Figma, complete with component variants and auto-layout tailored for seamless developer translation.",
+      "We utilized Figma for advanced prototyping, auto-layout components, and design systems, paired with Tailwind CSS and React for production implementation.",
   },
   {
     question: "How does the platform handle high traffic during harvest seasons?",
     answer:
-      "By utilizing optimized server-side rendering, edge caching, and high-performance database indexing to guarantee sub-second page load speeds even under massive concurrent rural loads.",
+      "The architecture leverages auto-scaling cloud infrastructure, edge caching, and optimized database indexing to handle massive spikes in concurrent traffic seamlessly.",
   },
 ];
 
-function Eyebrow({ index, label }: { index?: string; label: string }) {
-  return (
-    <div className="flex items-center gap-3 mb-4">
-      {index && (
-        <span className="font-mono text-[11px] tracking-[0.15em] text-[#FFDDA1]/70">
-          {index}
-        </span>
-      )}
-      <span className="h-px w-8 bg-[#F7A400]/40" />
-      <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#FFDDA1]">
-        {label}
-      </span>
-    </div>
-  );
-}
-
-function Furrow({ index }: { index: string }) {
-  return (
-    <div className="mx-auto max-w-[1445px] flex items-center gap-4 py-4">
-      <span className="font-mono text-[11px] tracking-[0.2em] text-[#FFDDA1]/60">
-        {index}
-      </span>
-      <span className="h-px flex-1 bg-gradient-to-r from-[#1a2333] via-[#F7A400]/30 to-transparent" />
-    </div>
-  );
-}
-
-export default function ProjectHeroShowcase() {
+function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const [query, setQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filtered = useMemo(() => {
-    if (!query.trim()) return faqs;
-    return faqs.filter(
-      (f) =>
-        f.question.toLowerCase().includes(query.toLowerCase()) ||
-        f.answer.toLowerCase().includes(query.toLowerCase()),
-    );
-  }, [query]);
-
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const filteredFaqs = faqs.filter((faq) =>
+    faq.question.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
-    <section
-      className={`${display.variable} ${body.variable} ${mono.variable} relative w-full overflow-hidden bg-[#02050a] py-16 font-[var(--font-body)] text-white sm:py-24 lg:py-28`}
-    >
-      {/* ============ BACKGROUND (Pure #02050a + Monochrome Tones, Zero AI Colors) ============ */}
-
-      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#02050a] via-[#02050a]/80 to-transparent pointer-events-none" />
-
-      {/* Neutral Multi-Layer Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1400px] h-[350px] sm:h-[500px] lg:h-[600px] bg-gradient-to-r from-white/[0.04] via-white/[0.07] to-white/[0.04] rounded-full blur-[100px] sm:blur-[160px] lg:blur-[200px] pointer-events-none z-0" />
-      
-      {/* Grid Pattern Background Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_2px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:2.5rem_2.5rem] pointer-events-none z-0" />
-
-      <div className="absolute top-10 -left-20 w-[450px] h-[450px] bg-white/[0.03] rounded-full blur-[140px] pointer-events-none z-0 animate-pulse" style={{ animationDuration: "10s" }} />
-      <div className="absolute bottom-1/3 right-10 w-[400px] h-[400px] bg-white/[0.03] rounded-full blur-[150px] pointer-events-none z-0" />
-
-      <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-[0.05] mix-blend-overlay"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-        }}
-      />
-
-      <div className="relative z-10 mx-auto max-w-[1445px] px-5 sm:px-8 lg:px-12">
-        
-        {/* ============ TOP NAV ============ */}
-        <div className="mb-10 flex items-center justify-between border-b border-white/10 pb-6">
-          <Link
-            href="/portfolio"
-            className="group inline-flex items-center gap-2.5 text-[14px] sm:text-[15px] font-medium text-white/80 transition-colors hover:text-white"
-          >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-[#0b0f19] transition-transform group-hover:-translate-x-1">
-              <FiArrowLeft className="h-4 w-4 text-[#FFDDA1]" />
-            </span>
-            <span>Back to Portfolio</span>
-          </Link>
+    <section className="w-full py-[32px] sm:py-[64px] relative overflow-hidden border-t border-white/10 mt-[40px] z-10">
+      <div className="max-w-[1445px] w-full mx-auto px-2 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-[28px] sm:gap-[40px] lg:gap-[64px] items-start">
           
-        </div>
-
-        {/* ============ HERO SECTION ============ */}
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-5">
-            <div className="inline-flex items-center gap-2 rounded-md bg-white/[0.05] border border-white/15 px-3 py-1 mb-6">
-              <FiSparkles className="text-[#FFDDA1] h-3.5 w-3.5" />
-              <span className="font-mono text-[11px] sm:text-[12px] uppercase tracking-[0.2em] text-[#FFDDA1]">
-                UI / UX Design — AgriTech Ecosystem
+          {/* FAQ Heading & Search */}
+          <div className="lg:col-span-5 lg:sticky lg:top-[128px]">
+            <div className="flex items-center gap-2 mb-[12px]">
+              <span className="w-[18px] h-[1px] bg-[#F7A400]" />
+              <span className="text-[11px] sm:text-[12px] uppercase tracking-[0.2em] font-medium text-[#F7A400]">
+                FAQ
               </span>
             </div>
-            
-            <h1 className="font-[var(--font-display)] text-[30px] sm:text-[36px] lg:text-[42px] font-semibold leading-[1.08] tracking-[-0.01em]">
-              Farmer Care,
-              
-              <span
-                className="bg-clip-text text-transparent  drop-shadow-sm"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(90deg, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
-                }}
-              >
-                designed for trust.
-              </span>
-            </h1>
 
-            <p className="mt-6 max-w-3xl text-[16px] sm:text-[18px] lg:text-[20px] leading-relaxed text-white/85">
-              A high-impact, dual-sided digital architecture connecting rural producers with dynamic markets, transparent financial credit, and modern telemetry—engineered for extreme clarity and sub-second execution in the field.
-            </p>
-
-
-          </div>
-
-          <div className="lg:col-span-7">
-            <div className="relative group">
-              <div className="absolute -inset-1.5 rounded-[12px] bg-gradient-to-r from-[#FFDDA1]/20 via-[#F7A400]/20 to-[#FFDDA1]/20 opacity-70 blur-md transition duration-500 group-hover:opacity-100" />
-              
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[8px] bg-[#0b0f19] border border-white/10 shadow-2xl">
-                <Image
-                  src="/image_d189a7.jpg"
-                  alt="Farmer Care UI/UX Mockup"
-                  fill
-                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#02050a]/80 via-transparent to-transparent pointer-events-none" />
-                
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                  <span className="rounded-md bg-[#02050a]/90 border border-white/10 px-3 py-1.5 font-mono text-[10px] sm:text-[11px] tracking-[0.1em] text-[#FFDDA1] backdrop-blur-md">
-                    FIG. 01 — PRODUCT SURFACE
-                  </span>
-                  <span className="rounded-md bg-white/10 border border-white/20 px-2.5 py-1 font-mono text-[10px] text-[#FFDDA1]">
-                    Production Ready
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ============ METRICS STRIP ============ */}
-        <div className="mt-16 grid grid-cols-2 divide-x divide-y divide-white/10 rounded-[12px] border border-white/10 bg-[#0b0f19]/85 backdrop-blur-xl sm:grid-cols-4 sm:divide-y-0">
-          {projectMeta.map((item) => {
-            const IconComponent = item.icon;
-            return (
-              <div key={item.label} className="px-6 py-6 transition-colors hover:bg-white/[0.03]">
-                <div className="flex items-center gap-2 mb-2">
-                  <IconComponent className="h-4 w-4 text-[#F7A400]" />
-                  <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-white/60">
-                    {item.label}
-                  </p>
-                </div>
-                <p className="text-[16px] sm:text-[17px] font-bold text-white tracking-wide">
-                  {item.value}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* ============ EXECUTIVE SUMMARY ============ */}
-        <Furrow index="01" />
-        <div id="features" className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-12 lg:gap-12 items-center">
-          <div className="lg:col-span-4">
-            <Eyebrow label="Executive Summary" />
-            <h3
-              className="font-[var(--font-display)] text-[26px] sm:text-[32px] font-semibold leading-snug bg-clip-text text-transparent"
-              style={{
-                backgroundImage:
-                  "linear-gradient(90deg, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
-              }}
-            >
-              One unified network, engineered for extreme contrast in user intent.
-            </h3>
-          </div>
-          
-          <div className="border-l border-white/10 pl-6 sm:pl-10 lg:col-span-8">
-            <p className="text-[16px] sm:text-[18px] leading-[1.8] text-white/85">
-              Farmer Care bridges the gap between rural agrarian communities and high-tier financial markets. The challenge was crafting an intuitive, low-latency mobile UI for field operators while delivering a comprehensive, data-dense portfolio interface for urban investors and administrative regulators. Using rigorous Atomic Design methodologies, every component scales gracefully from offline-first mobile viewports to executive desktop dashboards.
-            </p>
-            
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-white/10">
-              {[
-                ["94%", "Rural Usability Index"],
-                ["48%", "Reduction in Supply Waste"],
-                ["320%", "Increase in Producer Yield"],
-              ].map(([stat, label]) => (
-                <div 
-                  key={label} 
-                  className="bg-[#0b0f19]/80 backdrop-blur-xl border border-white/10 hover:border-[#F7A400]/40 rounded-3xl p-6 sm:p-8 flex flex-col items-center text-center transition-all duration-300 group shadow-xl hover:shadow-[0_15px_30px_rgba(247,164,0,0.1)] relative overflow-hidden"
-                >
-                  <div className="absolute -right-10 -top-10 w-28 h-28 bg-[#F7A400]/10 rounded-full blur-xl pointer-events-none group-hover:bg-[#F7A400]/20 transition-all" />
-                  <span
-                    className="font-[var(--font-display)] text-[28px] sm:text-[34px] bg-clip-text text-transparent block font-bold relative z-10"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(90deg, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
-                    }}
-                  >
-                    {stat}
-                  </span>
-                  <span className="mt-2 block text-[13px] text-white/70 relative z-10">
-                    {label}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ============ CHALLENGE ============ */}
-        <Furrow index="02" />
-        <div className="py-10">
-          <Eyebrow label="Project Challenge" />
-          <p className="max-w-4xl text-[18px] sm:text-[22px] lg:text-[24px] font-semibold leading-relaxed text-white">
-            Scaling decentralized agricultural data ingestion while maintaining instant load performance across unstable cellular networks during crucial seasonal harvest peaks.
-          </p>
-        </div>
-
-        {/* ============ PROBLEM / SOLUTION ============ */}
-        <Furrow index="03" />
-        <div className="grid grid-cols-1 gap-x-12 gap-y-10 py-10 md:grid-cols-2">
-          <div className="bg-[#0b0f19]/80 backdrop-blur-xl border border-white/10 hover:border-white/25 rounded-3xl p-6 sm:p-8 flex flex-col items-start text-left transition-all duration-300 group shadow-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl pointer-events-none" />
-            <p className="font-mono text-[11px] sm:text-[12px] uppercase tracking-[0.2em] text-white/50 mb-3">
-              01 — The Legacy Bottleneck
-            </p>
-            <h4 className="text-[18px] font-semibold text-white mb-2">High Latency & Complex Friction</h4>
-            <p className="text-[15px] sm:text-[16px] leading-relaxed text-white/75">
-              Legacy agricultural platforms suffered from massive drop-off rates due to unoptimized asset bundles, heavy JavaScript payloads, and zero offline redundancy for rural field deployment.
-            </p>
-          </div>
-
-          <div className="bg-[#0b0f19]/80 backdrop-blur-xl border border-white/10 hover:border-white/25 rounded-3xl p-6 sm:p-8 flex flex-col items-start text-left transition-all duration-300 group shadow-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl pointer-events-none" />
-            <p className="font-mono text-[11px] sm:text-[12px] uppercase tracking-[0.2em] text-[#FFDDA1] mb-3">
-              02 — The Modern Architecture
-            </p>
-            <h4 className="text-[18px] font-semibold text-white mb-2">Optimized Edge SSR & Modular UX</h4>
-            <p className="text-[15px] sm:text-[16px] leading-relaxed text-white/75">
-              We re-engineered the experience using Next.js App Router, edge caching strategies, atomic component structuring, and a modular state pipeline that guarantees sub-second interactive speeds.
-            </p>
-          </div>
-        </div>
-
-        {/* ============ SERVICES + STACK ============ */}
-        <Furrow index="04" />
-        <div className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-6 bg-[#0b0f19]/80 backdrop-blur-xl border border-white/10 hover:border-white/20 rounded-3xl p-6 sm:p-8 transition-all duration-300 shadow-xl">
-            <Eyebrow label="Services Provided" />
-            <ul className="space-y-4 mt-6">
-              {servicesProvided.map((service) => (
-                <li
-                  key={service}
-                  className="flex items-center gap-3.5 text-[16px] text-white/90"
-                >
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#F7A400]/20 text-[#FFDDA1]">
-                    <FiCheck className="h-3 w-3 stroke-[3]" />
-                  </span>
-                  {service}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:col-span-6 bg-[#0b0f19]/80 backdrop-blur-xl border border-white/10 hover:border-white/20 rounded-3xl p-6 sm:p-8 transition-all duration-300 shadow-xl">
-            <Eyebrow label="Tech Stack & Tools" />
-            <div className="flex flex-wrap gap-2.5 mt-6">
-              {techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-lg border border-white/10 bg-[#02050a] px-4 py-2.5 font-mono text-[12px] sm:text-[13px] text-white/90 transition-all hover:border-[#F7A400]/40 hover:bg-[#121a2d]"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* ============ FEATURED CREATIVE ============ */}
-        <Furrow index="05" />
-        <div className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-12 lg:gap-12 items-center">
-          <div className="lg:col-span-4">
-            <Eyebrow label="Featured Creative" />
-            <h2
-              className="font-[var(--font-display)] text-[28px] sm:text-[34px] font-semibold leading-tight bg-clip-text text-transparent"
-              style={{
-                backgroundImage:
-                  "linear-gradient(90deg, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
-              }}
-            >
-              Core modules shipped.
+            <h2 className="text-[28px] sm:text-[44px] font-bold leading-[1.15] tracking-tight mb-[16px]" style={gradientTextStyle}>
+              Common inquiries.
             </h2>
-            <p className="mt-4 text-[15px] sm:text-[16px] leading-relaxed text-white/75">
-              Four primary architectural components carried the heaviest UX weight—prioritizing frictionless micro-credit processing above all.
+
+            <p className="text-zinc-300 text-[13px] sm:text-[16px] leading-[1.6] mb-[28px]">
+              Detailed breakdowns covering technical choices, design scaling, and workflow execution.
             </p>
+
+            {/* Search Input - Glass */}
+            <div className="relative mb-[20px] max-w-[380px]">
+              <Search className="absolute left-[16px] top-1/2 -translate-y-1/2 text-zinc-400" size={16} />
+              <input
+                type="text"
+                placeholder="Search case questions..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-white/[0.03] backdrop-blur-2xl border border-white/15 rounded-full py-3 md:py-3.5 pl-[44px] pr-[16px] text-[13px] text-white placeholder-zinc-400 focus:outline-none focus:border-[#F7A400]/50 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.2)]"
+              />
+            </div>
+
+            {/* Speak to an Expert Button */}
+            <div>
+              <button className="bg-[linear-gradient(90deg,#FFDDA1_0%,#F7A400_50%,#FFDDA1_100%)] text-black font-semibold text-[13px] sm:text-[14px] px-[24px] py-[14px] rounded-[40px] shadow-[0_0_25px_rgba(247,164,0,0.25)] hover:opacity-95 transition-all cursor-pointer">
+                Speak to an Expert
+              </button>
+            </div>
           </div>
-          
-          <div className="space-y-4 lg:col-span-8">
-            {featuredCreativeItems.map((item) => (
-              <div
-                key={item.title}
-                className={`flex items-start gap-4 rounded-3xl p-6 transition-all duration-300 backdrop-blur-xl border ${
-                  item.active
-                    ? "bg-[#0b0f19]/90 border-[#F7A400]/50 shadow-lg shadow-[#F7A400]/10"
-                    : "bg-[#0b0f19]/60 border-white/10 hover:border-white/20"
-                }`}
-              >
+
+          {/* FAQ Items */}
+          <div className="lg:col-span-7 space-y-[0px] border-t border-white/10">
+            {filteredFaqs.map((faq, index) => {
+              const isOpen = openIndex === index;
+              const formattedNumber = String(index + 1).padStart(2, '0');
+
+              return (
                 <div
-                  className={`mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full ${
-                    item.active
-                      ? "bg-gradient-to-r from-[#FFDDA1] via-[#F7A400] to-[#FFDDA1] text-[#02050a]"
-                      : "border border-white/10 text-white/40 bg-[#02050a]"
-                  }`}
+                  key={faq.question}
+                  className="border-b border-white/10 transition-all duration-300"
                 >
-                  <FiCheck className="h-3.5 w-3.5 stroke-[3]" />
-                </div>
-                <div>
-                  <h4 className="text-[17px] font-semibold text-white">
-                    {item.title}
-                  </h4>
-                  <p className="mt-1 text-[14px] sm:text-[15px] leading-relaxed text-white/70">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ============ RESULTS ============ */}
-        <Furrow index="06" />
-        <div className="py-10">
-          <Eyebrow label="Results & Impact" />
-          <p className="max-w-3xl text-[18px] sm:text-[20px] font-semibold leading-relaxed text-white">
-            Achieved a 45% increase in active organic retention rates and successfully brought transaction drop-off to near-zero within the primary initial deployment cycle.
-          </p>
-        </div>
-
-        {/* ============ TESTIMONIAL ============ */}
-        <div className="relative my-12 overflow-hidden rounded-3xl bg-gradient-to-br from-[#0b0f19] to-[#121a2d] border border-white/10 px-6 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20 shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#F7A400]/5 rounded-full blur-3xl pointer-events-none" />
-          <FiQuote className="absolute right-8 bottom-4 h-32 w-32 sm:h-44 sm:w-44 text-white/[0.03] pointer-events-none" />
-          
-          <blockquote className="relative max-w-4xl font-[var(--font-display)] text-[20px] sm:text-[26px] lg:text-[32px] font-semibold leading-[1.4] text-white">
-            &ldquo;Working with the team was an absolute game-changer. Their rigorous focus on both complex backend efficiency and elegant rural user experience exceeded every milestone.&rdquo;
-          </blockquote>
-          
-          <div className="relative mt-8 flex items-center gap-4">
-            <span className="h-px w-12 bg-[#F7A400]/60" />
-            <div>
-              <span className="block text-[15px] sm:text-[16px] font-bold text-white">
-                Alex Morgan
-              </span>
-              <span className="text-[13px] sm:text-[14px] text-[#FFDDA1]/80">
-                Founder & Chief Executive Officer, Farmer Care Global
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* ============ FAQ SECTION ============ */}
-        <div className="py-16">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:sticky lg:top-24 lg:col-span-4 lg:self-start">
-              <Eyebrow label="FAQ" />
-              <h2
-                className="font-[var(--font-display)] text-[28px] sm:text-[34px] lg:text-[40px] font-semibold leading-tight bg-clip-text text-transparent"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(90deg, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
-                }}
-              >
-                Common inquiries.
-              </h2>
-              <p className="mt-4 text-[15px] sm:text-[16px] leading-relaxed text-white/75">
-                Detailed breakdowns covering technical choices, design scaling, and workflow execution.
-              </p>
-
-              <div className="relative mt-8 max-w-md">
-                <Search
-                  size={16}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-[#F7A400]"
-                />
-                <input
-                  type="text"
-                  value={query}
-                  onChange={(e) => {
-                    setOpenIndex(null);
-                    setQuery(e.target.value);
-                  }}
-                  placeholder="Search case questions…"
-                  className="w-full rounded-full border border-white/10 bg-[#0b0f19] py-3.5 pl-11 pr-4 text-[14px] text-white placeholder:text-white/40 focus:border-[#F7A400]/60 focus:outline-none transition-colors"
-                />
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                <button className="rounded-full bg-gradient-to-r from-[#FFDDA1] via-[#F7A400] to-[#FFDDA1] text-[#02050a] px-6 py-3 text-[14px] font-bold transition-all hover:opacity-95 shadow-lg shadow-[#F7A400]/20">
-                  Speak to an Expert
-                </button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-8">
-              {filtered.length === 0 && (
-                <div className="rounded-3xl border border-dashed border-white/10 bg-[#0b0f19]/50 px-6 py-16 text-center">
-                  <p className="text-[15px] text-white/80">
-                    No matching items found for{" "}
-                    <span className="font-semibold text-[#FFDDA1]">
-                      &ldquo;{query}&rdquo;
-                    </span>
-                  </p>
-                </div>
-              )}
-
-              <div className="divide-y divide-white/10 border-y border-white/10">
-                {filtered.map((faq, index) => {
-                  const isOpen = openIndex === index;
-                  return (
-                    <div key={faq.question} className="transition-colors hover:bg-white/[0.02]">
-                      <button
-                        onClick={() => toggleFAQ(index)}
-                        className="flex w-full items-start justify-between gap-4 py-7 text-left focus:outline-none"
-                      >
-                        <div className="flex items-start gap-4">
-                          <span
-                            className={`pt-0.5 font-mono text-[14px] shrink-0 transition-colors ${
-                              isOpen ? "text-[#F7A400]" : "text-white/40"
-                            }`}
-                          >
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
-                          <span className="text-[17px] sm:text-[19px] font-medium leading-snug text-white">
-                            {faq.question}
-                          </span>
-                        </div>
-                        <motion.span
-                          animate={{ rotate: isOpen ? 135 : 0 }}
-                          transition={{
-                            duration: 0.3,
-                            ease: [0.22, 1, 0.36, 1],
-                          }}
-                          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-colors ${
-                            isOpen
-                              ? "border-[#F7A400] bg-gradient-to-r from-[#FFDDA1] via-[#F7A400] to-[#FFDDA1] text-[#02050a]"
-                              : "border-white/10 bg-[#0b0f19] text-white"
-                          }`}
-                        >
-                          <Plus size={14} />
-                        </motion.span>
-                      </button>
-
-                      <AnimatePresence initial={false}>
-                        {isOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{
-                              duration: 0.35,
-                              ease: [0.22, 1, 0.36, 1],
-                            }}
-                            className="overflow-hidden"
-                          >
-                            <p className="max-w-3xl pb-7 pl-9 text-[15px] sm:text-[16px] leading-relaxed text-white/75">
-                              {faq.answer}
-                            </p>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                  <button
+                    onClick={() =>
+                      setOpenIndex(isOpen ? null : index)
+                    }
+                    className="w-full flex items-center justify-between gap-[16px] py-[24px] sm:py-[28px] text-left cursor-pointer group"
+                  >
+                    <div className="flex items-center gap-[20px] sm:gap-[24px]">
+                      <span className="text-[12px] sm:text-[14px] font-mono text-[#F7A400] font-medium">
+                        {formattedNumber}
+                      </span>
+                      <span className="text-[14px] sm:text-[18px] leading-[1.4] font-medium text-white group-hover:text-[#F7A400] transition-colors">
+                        {faq.question}
+                      </span>
                     </div>
-                  );
-                })}
-              </div>
-            </div>
+
+                    <span
+                      className={`w-[28px] h-[28px] sm:w-[32px] sm:h-[32px] rounded-full flex items-center justify-center transition-all shrink-0 ${
+                        isOpen
+                          ? "bg-[#F7A400] text-black"
+                          : "bg-white/5 text-zinc-300 group-hover:bg-white/10 group-hover:text-white"
+                      }`}
+                    >
+                      {isOpen ? <X size={15} /> : <Plus size={15} />}
+                    </span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="pl-[32px] sm:pl-[44px] pr-[20px] pb-[28px] text-zinc-300 text-[13px] sm:text-[15px] leading-[1.7]">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
+
         </div>
 
-        {/* ============ PREV / NEXT NAV ============ */}
-        <div className="flex items-center justify-between gap-4 border-t border-white/10 py-8">
-          <Link
-            href="/portfolio/fintech-dashboard"
-            className="group flex items-center gap-3 text-white transition-colors hover:text-[#FFDDA1]"
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-[#0b0f19] transition-transform group-hover:-translate-x-1">
-              <FiArrowLeft className="h-4 w-4 text-[#F7A400]" />
+        {/* Bottom Navigation (Previous / Next Case) */}
+        <div className="flex items-center justify-between pt-[30px] sm:pt-[60px] border-t border-white/10 mt-[40px]">
+          <button className="flex items-center gap-3 text-zinc-300 hover:text-white transition-colors group cursor-pointer">
+            <span className="w-[32px] h-[32px] rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#F7A400] group-hover:text-[#F7A400] transition-all">
+              <ChevronLeft size={16} />
+            </span>
+            <div className="text-left">
+              <span className="block text-[10px] tracking-widest text-zinc-400 uppercase">Previous Case</span>
+              <span className="text-[13px] sm:text-[14px] font-medium text-white">FinTech Dashboard</span>
             </div>
-            <div>
-              <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-white/50">
-                Previous Case
-              </p>
-              <p className="text-[15px] font-semibold">FinTech Dashboard</p>
-            </div>
-          </Link>
-          
-          <Link
-            href="/portfolio/cloud-saas-platform"
-            className="group flex items-center gap-3 text-right text-white transition-colors hover:text-[#FFDDA1]"
-          >
-            <div>
-              <p className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.15em] text-white/50">
-                Next Case
-              </p>
-              <p className="text-[15px] font-semibold">Cloud SaaS Platform</p>
-            </div>
-            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-[#0b0f19] transition-transform group-hover:translate-x-1">
-              <FiArrowRight className="h-4 w-4 text-[#F7A400]" />
-            </div>
-          </Link>
-        </div>
+          </button>
 
-        {/* ============ CTA FOOTER BANNER ============ */}
-        <div className="relative mt-12 overflow-hidden rounded-3xl bg-gradient-to-r from-[#0b0f19] via-[#121a2d] to-[#0b0f19] border border-white/10 px-8 py-20 text-center sm:py-24 shadow-2xl">
-          <div className="pointer-events-none absolute left-1/2 top-1/2 h-[260px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F7A400]/10 blur-[130px]" />
-          
-          <div className="relative mx-auto max-w-[700px]">
-            <h2
-              className="font-[var(--font-display)] text-[28px] sm:text-[36px] lg:text-[44px] font-semibold leading-tight bg-clip-text text-transparent"
-              style={{
-                backgroundImage:
-                  "linear-gradient(90deg, #FFDDA1 0%, #F7A400 50%, #FFDDA1 100%)",
-              }}
-            >
-              Ready to build something extraordinary together?
-            </h2>
-            <p className="mt-4 text-[16px] sm:text-[17px] leading-relaxed text-white/80">
-              Let&apos;s transform your complex product vision into a high-performance ecosystem, custom-engineered for absolute scale.
-            </p>
-            <Link
-              href="#contact"
-              className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#FFDDA1] via-[#F7A400] to-[#FFDDA1] px-8 py-4 text-[15px] font-bold text-[#02050a] shadow-lg shadow-[#F7A400]/20 transition-all hover:scale-[1.03]"
-            >
-              Start a Project
-              <FiArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </div>
+          <button className="flex items-center gap-3 text-zinc-300 hover:text-white transition-colors group cursor-pointer">
+            <div className="text-right">
+              <span className="block text-[10px] tracking-widest text-zinc-400 uppercase">Next Case</span>
+              <span className="text-[13px] sm:text-[14px] font-medium text-white">Cloud SaaS Platform</span>
+            </div>
+            <span className="w-[32px] h-[32px] rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#F7A400] group-hover:text-[#F7A400] transition-all">
+              <ChevronRight size={16} />
+            </span>
+          </button>
         </div>
 
       </div>
     </section>
+  );
+}
+
+// ==========================================
+// CTA SECTION COMPONENT
+// ==========================================
+
+function CallToActionSection() {
+  return (
+    <section className="w-full py-[48px] sm:py-[80px] relative overflow-hidden z-10 border-t border-white/10">
+      <div className="max-w-[1445px] w-full mx-auto px-2 sm:px-6 lg:px-8 relative z-10">
+        {/* CTA Card - Glass with Amber Glow */}
+        <div className="bg-[linear-gradient(135deg,rgba(43,28,10,0.3)_0%,rgba(20,15,30,0.3)_100%)] backdrop-blur-2xl  rounded-[10px] p-[36px] sm:p-[64px] lg:p-[80px] text-center relative overflow-hidden shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
+          
+          {/* Background Glow Effect */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] h-[200px] bg-[#F7A400]/15 rounded-full blur-[100px] pointer-events-none" />
+
+          <div className="relative z-10 max-w-[800px] mx-auto">
+            <h2 className="text-[22px] sm:text-[28px] lg:text-[32px] font-bold tracking-tight leading-[1.15] mb-[20px]" style={gradientTextStyle}>
+              Ready to build something extraordinary together?
+            </h2>
+
+            <p className="text-zinc-300 text-[14px] sm:text-[18px] leading-[1.6] mb-[36px] max-w-[650px] mx-auto">
+              Let&apos;s transform your complex product vision into a high-performance ecosystem, custom-engineered for absolute scale.
+            </p>
+
+            <div>
+              <button className="bg-[linear-gradient(90deg,#FFDDA1_0%,#F7A400_50%,#FFDDA1_100%)] text-black font-semibold text-[12px] sm:text-[15px] px-4 md:px-8 py-3 md:py-3.5 rounded-full shadow-[0_0_30px_rgba(247,164,0,0.3)] hover:opacity-95 transition-all inline-flex items-center gap-2 cursor-pointer group">
+                <span>Start a Project</span>
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ==========================================
+// PRODUCT DATABASE & DETAILS PAGE
+// ==========================================
+
+const initialProducts = [
+  {
+    id: 1,
+    title: "Restropos - Next-Generation Restaurant Automation",
+    price: "$4,999 ",
+    category: "Enterprise Software",
+    rating: 4.9,
+    reviewsCount: 128,
+    description:
+      "Restropos is a premium, cloud-ready restaurant management system engineered by Campaignsquat Ltd. Built specifically to streamline complex food service workflows, it bridges the gap between front-of-house hospitality and back-of-house efficiency.",
+    image:
+      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1400&auto=format&fit=crop",
+  },
+];
+
+export default function ProductDetailsPage() {
+  const params = useParams();
+
+  const productId = Number(params?.id) || 1;
+
+  const product =
+    initialProducts.find((item) => item.id === productId) ||
+    initialProducts[0];
+
+  return (
+    <article className="min-h-screen bg-[#02050a] text-white pt-0 pb-[32px] sm:pb-[64px] relative overflow-hidden font-poppins selection:bg-[#F7A400] selection:text-black">
+
+      {/* =====================================================
+          BACKGROUND CREATIVE EFFECTS
+      ===================================================== */}
+
+      <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#02050a] via-[#02050a]/80 to-transparent pointer-events-none" />
+
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1400px] h-[350px] sm:h-[500px] lg:h-[600px] bg-gradient-to-r from-[#ff7a33]/15 via-[#3b82f6]/15 to-[#00ffff]/10 rounded-full blur-[100px] sm:blur-[160px] lg:blur-[200px] pointer-events-none z-0" />
+
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_2px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] sm:bg-[size:40px_40px] pointer-events-none z-0" />
+
+      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[#F7A400]/10 rounded-full blur-[120px] pointer-events-none z-0" />
+
+      {/* =====================================================
+          FULL WIDTH IMAGE
+      ===================================================== */}
+
+      <div className="w-screen relative mb-[28px] sm:mb-[36px] left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+        <div className="relative w-full h-[300px] sm:h-[500px] lg:h-[650px] overflow-hidden  bg-[#02050a]">
+
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            className="w-full h-full object-cover select-none"
+            priority
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-b from-[#02050a] via-transparent to-transparent pointer-events-none" />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-[#02050a] via-transparent to-transparent pointer-events-none" />
+
+        </div>
+      </div>
+
+      {/* =====================================================
+          MAIN CONTAINER
+      ===================================================== */}
+
+      <HeroHeaderSection />
+      <ProjectMetaBar />
+      <ProjectIntroChallengeSection />
+      <SolutionSection />
+      <CoreModulesSection />
+      <ResultsTestimonialSection />
+      <FAQSection />
+      <CallToActionSection />
+
+    </article>
   );
 }
